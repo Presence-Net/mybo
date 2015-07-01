@@ -1,0 +1,50 @@
+.other-month {
+    background-color: #ccc !important;
+}
+.current-month {
+    background-color: #fff;
+}
+.weekend-day {
+    background-color: #eee;
+}
+.current-day {
+    background-color: orange;
+}
+.day {
+    min-height: 15rem;
+    padding: 0.5rem !important;
+}
+.day .ops {
+    height: 10rem;
+    overflow: auto;
+}
+.ui.grid.calendar {
+
+}
+.ui.grid.calendar .row.week {
+
+}
+.ui.grid.calendar .row.week .column.day {
+
+}
+.ui.grid.calendar > .row {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.ui.grid.calendar .row .column {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+.ui.grid.calendar .row .column:last-child {
+    border-right: 1px solid black;
+}
+.ui.grid.calendar .row:last-child .column {
+    border-bottom: 1px solid black;
+}
+
+.tutorial.step div,
+.tutorial.step div.ui.grid,
+.tutorial.step div.row,
+.tutorial.step div.column {
+    border: none !important;
+}
