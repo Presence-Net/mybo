@@ -20,6 +20,12 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             
             new Sp\BowerBundle\SpBowerBundle(),
+
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+
+            new FOS\UserBundle\FOSUserBundle(),
+
+            new Lunetics\LocaleBundle\LuneticsLocaleBundle(),
             
             new AppBundle\AppBundle(),
         );

@@ -1,0 +1,58 @@
+{% extends "::base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+{% if error %}
+<div class="ui grid">
+	<div class="row">
+		<div class="column">
+		    <div class="messages">
+		        <div class="ui error message">
+		            <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+<div class="ui centered grid">
+	<div class="eight wide one column centered row">
+		<div class="column">
+			<div class="ui segment">
+				<form action="{{ path("fos_user_security_check") }}" method="post" class="ui form">
+				    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+					<div class="ui grid">
+						<div class="two column row">
+							<div class="column">
+								<label for="username">{{ 'form.email'|trans }}</label>
+							</div>
+							<div class="column">
+								<input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+							</div>
+						</div>
+						<div class="two column row">
+							<div class="column">
+								<label for="password">{{ 'security.login.password'|trans }}</label>
+							</div>
+							<div class="column">
+								<input type="password" id="password" name="_password" required="required" />
+							</div>
+						</div>
+						<div class="two column row">
+							<div class="column">
+							    <input type="checkbox" id="remember_me" name="_remember_me" value="on" class="ui checkbox" />
+							    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+							</div>
+							<div class="column">
+								<input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="ui button" />
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

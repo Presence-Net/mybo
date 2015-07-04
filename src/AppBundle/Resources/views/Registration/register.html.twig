@@ -1,0 +1,71 @@
+{% extends "::base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+{{ form_errors(form) }}
+
+<div class="ui centered grid">
+	<div class="eight wide one column centered row">
+		<div class="column">
+			<div class="ui segment">
+				<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register ui form">
+					{{ form_widget(form._token) }}
+					<div class="ui grid">
+						<div class="two column row">
+							<div class="column">
+								{{ form_label(form.first_name) }}
+							</div>
+							<div class="column">
+								{{ form_widget(form.first_name) }}
+								{{ form_errors(form.first_name) }}
+							</div>
+						</div>
+						<div class="two column row">
+							<div class="column">
+								{{ form_label(form.last_name) }}
+							</div>
+							<div class="column">
+								{{ form_widget(form.last_name) }}
+								{{ form_errors(form.last_name) }}
+							</div>
+						</div>
+						<div class="two column row">
+							<div class="column">
+								{{ form_label(form.email) }}
+							</div>
+							<div class="column">
+								{{ form_widget(form.email) }}
+								{{ form_errors(form.email) }}
+							</div>
+						</div>
+						<div class="two column row">
+							<div class="column">
+								{{ form_label(form.plainPassword.first) }}
+							</div>
+							<div class="column">
+								{{ form_widget(form.plainPassword.first) }}
+								{{ form_errors(form.plainPassword.first) }}
+							</div>
+						</div>
+						<div class="two column row">
+							<div class="column">
+								{{ form_label(form.plainPassword.second) }}
+							</div>
+							<div class="column">
+								{{ form_widget(form.plainPassword.second) }}
+								{{ form_errors(form.plainPassword.second) }}
+							</div>
+						</div>
+						<div class="one column centered row">
+							<div class="aligned centered column">
+								<input type="submit" value="{{ 'registration.submit'|trans }}" class="ui button" />
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

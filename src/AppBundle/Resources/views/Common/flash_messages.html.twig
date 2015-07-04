@@ -1,0 +1,45 @@
+                    <div class="messages">
+                        <div class="ui warning message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                You must register before you can do that!
+                            </div>
+                            Visit our registration page, then try again
+                        </div>
+                        <div class="ui info message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                Was this what you wanted?
+                            </div>
+                            <ul class="list">
+                                <li>It's good to see you again.</li>
+                                <li>Did you know it's been a while?</li>
+                            </ul>
+                        </div>
+                        <div class="ui success message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                Your user registration was successful.
+                            </div>
+                            <p>You may now log-in with the username you have chosen</p>
+                        </div>
+                        <div class="ui error message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                There was some errors with your submission
+                            </div>
+                            <ul class="list">
+                                <li>You must include both a upper and lower case letters in your password.</li>
+                                <li>You need to select your home country.</li>
+                            </ul>
+                        </div>
+                    </div>
+        {% if app.request.hasPreviousSession %}
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
