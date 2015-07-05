@@ -56,7 +56,7 @@ class Builder extends ContainerAware
 
         if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
 	        $menu->addChild($trans->trans('Budget'), array(
-	       		'route' => 'home',
+	       		'route' => 'budget_home',
 	            'attributes' => array(
 	            ),
 	       		'linkAttributes' => array(
@@ -68,7 +68,7 @@ class Builder extends ContainerAware
 	        ));
 
 	        $menu->addChild($trans->trans('Calendar'), array(
-	       		'route' => 'home',
+	       		'route' => 'budget_calendar',
 	            'attributes' => array(
 	            ),
 	       		'linkAttributes' => array(
@@ -80,7 +80,7 @@ class Builder extends ContainerAware
 	        ));
 
 	        $menu->addChild($trans->trans('Details'), array(
-	       		'route' => 'home',
+	       		'route' => 'budget_details',
 	            'attributes' => array(
 	            ),
 	       		'linkAttributes' => array(
@@ -92,7 +92,7 @@ class Builder extends ContainerAware
 	        ));
 
 	        $menu->addChild($trans->trans('Summary'), array(
-	       		'route' => 'home',
+	       		'route' => 'budget_summary',
 	            'attributes' => array(
 	            ),
 	       		'linkAttributes' => array(
