@@ -33,7 +33,9 @@
         "lunetics/locale-bundle": "2.3.*",
         "tplaner/when": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "^1.5",
-        "twig/extensions": "^1.2"
+        "twig/extensions": "^1.2",
+        "doctrine/migrations": "^1.0",
+        "doctrine/doctrine-migrations-bundle": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
