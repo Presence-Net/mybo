@@ -17,15 +17,25 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle,
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle,
             
             new Sp\BowerBundle\SpBowerBundle(),
 
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             new Lunetics\LocaleBundle\LuneticsLocaleBundle(),
+
+            new JMS\AopBundle\JMSAopBundle,
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle,
+
+            new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             
             new AppBundle\AppBundle(),
         );
@@ -35,6 +45,7 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new Elao\WebProfilerExtraBundle\WebProfilerExtraBundle();
         }
 
         return $bundles;

@@ -1,3 +1,7 @@
+.days-header .column {
+    font-weight: bold;
+    text-align: center;
+}
 .other-month {
     background-color: #ccc !important;
 }
@@ -14,9 +18,12 @@
     min-height: 15rem;
     padding: 0.5rem !important;
 }
-.day .ops {
+.day .operations {
     height: 10rem;
     overflow: auto;
+}
+.day .options {
+    padding-top: 0.7rem;
 }
 .ui.grid.calendar {
 

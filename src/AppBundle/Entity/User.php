@@ -1,5 +1,4 @@
 <?php
-// src/Acme/UserBundle/Entity/User.php
 
 namespace AppBundle\Entity;
 
@@ -19,6 +18,15 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group")
+     * @ORM\JoinTable(name="users_groups",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
 
     /**
      * @ORM\Column(type="string", length=255)
