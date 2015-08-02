@@ -12,7 +12,6 @@ $(function(){
             year: $form.find('select[name=year]').val(),
             month: $form.find('select[name=month]').val()
         });
-        console.log(url);
         document.location.href = url;
     })
-})
+});

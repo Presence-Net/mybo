@@ -6,6 +6,7 @@ use When\When as RecursableCalendar;
 
 class Calendar
 {
+    private $today = null;
     private $date = null;
     
     private $dateStart = null;
@@ -28,6 +29,8 @@ class Calendar
     private $closingBalance = 0;
     
     public function __construct($date) {
+        $this->today = new \DateTime('now');
+        
         $this->date = new \DateTime($date);
         
         $this->engine = new RecursableCalendar();
@@ -43,6 +46,11 @@ class Calendar
     public function getData()
     {
         return $this->data;
+    }
+    
+    public function getToday()
+    {
+        return $this->today;
     }
     
     public function getDate()

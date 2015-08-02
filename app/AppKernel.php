@@ -7,6 +7,11 @@ use Symfony\Component\HttpKernel\Config\FileLocator;
 
 class AppKernel extends Kernel
 {
+    public function init() {
+        date_default_timezone_set( 'America/New_York' );
+        parent::init();
+    }
+
     public function registerBundles()
     {
         $bundles = array(

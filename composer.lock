@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "63393da1a47633f5bf69533f72ab473d",
+    "hash": "9afad218d74c9eb0151da02cc2bb2e3b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -977,12 +977,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "5d7017d35f73cdb74e069f9d607cd0448d305078"
+                "reference": "7d3807c03c6d9f2943c92ba004d69dceb260d45c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/5d7017d35f73cdb74e069f9d607cd0448d305078",
-                "reference": "5d7017d35f73cdb74e069f9d607cd0448d305078",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/7d3807c03c6d9f2943c92ba004d69dceb260d45c",
+                "reference": "7d3807c03c6d9f2943c92ba004d69dceb260d45c",
                 "shasum": ""
             },
             "require": {
@@ -1036,7 +1036,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-07-31 13:22:19"
+            "time": "2015-08-02 18:02:19"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -2727,6 +2727,58 @@
                 "time"
             ],
             "time": "2015-07-19 14:50:01"
+        },
+        {
+            "name": "twig/extensions",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig-extensions.git",
+                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
+                "reference": "8cf4b9fe04077bd54fc73f4fde83347040c3b8cd",
+                "shasum": ""
+            },
+            "require": {
+                "twig/twig": "~1.12"
+            },
+            "require-dev": {
+                "symfony/translation": "~2.3"
+            },
+            "suggest": {
+                "symfony/translation": "Allow the time_diff output to be translated"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_Extensions_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Common additional features for Twig that do not directly belong in core",
+            "homepage": "http://twig.sensiolabs.org/doc/extensions/index.html",
+            "keywords": [
+                "i18n",
+                "text"
+            ],
+            "time": "2014-10-30 14:30:03"
         },
         {
             "name": "twig/twig",

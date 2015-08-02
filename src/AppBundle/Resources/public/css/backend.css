@@ -1,3 +1,9 @@
+.calendar-nav .item.dropdown {
+    padding: 0;
+}
+.calendar-nav .item.dropdown select {
+    border: none;
+}
 .days-header .column {
     font-weight: bold;
     text-align: center;
@@ -19,11 +25,13 @@
     padding: 0.5rem !important;
 }
 .day .operations {
-    height: 10rem;
+    height: 11rem;
     overflow: auto;
+    margin-top: 1.2rem;
 }
 .day .options {
-    padding-top: 0.7rem;
+    /*padding-top: 0.7rem;*/
+    float: right;
 }
 .ui.grid.calendar {
 

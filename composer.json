@@ -15,6 +15,7 @@
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
+        "symfony/intl": "~2.4",
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
@@ -31,7 +32,8 @@
         "doctrine/doctrine-fixtures-bundle" : "*",
         "lunetics/locale-bundle": "2.3.*",
         "tplaner/when": "dev-master",
-        "friendsofsymfony/jsrouting-bundle": "^1.5"
+        "friendsofsymfony/jsrouting-bundle": "^1.5",
+        "twig/extensions": "^1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
