@@ -2,11 +2,12 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: @AppBundle/Resources/config/admin.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en_CA
+    locale: en
 
 framework:
     #esi:             ~
@@ -37,6 +38,10 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            # other files
+            - 'SonataMediaBundle:Form:media_widgets.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -72,18 +77,25 @@ doctrine:
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #     path:     "%database_path%"
+        types:
+            json: Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
-        mappings:
-            translatable:
-                type: annotation
-                is_bundle: false
-                prefix: Gedmo\Translatable\Entity
-                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
-                alias: GedmoTranslatable
+        #naming_strategy: doctrine.orm.naming_strategy.underscore
+        #auto_mapping: true
+        entity_managers:
+            default:
+                mappings:
+                    gedmo_translatable:
+                        type: annotation
+                        prefix: Gedmo\Translatable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                        alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    ApplicationSonataMediaBundle: ~
+                    SonataMediaBundle: ~
+                    AppBundle: ~
 
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/DoctrineMigrations"
@@ -147,3 +159,47 @@ stof_doctrine_extensions:
         default:
             sluggable: true
             translatable: true
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+sonata_media:
+    # if you don't use default namespace configuration
+    #class:
+    #    media: MyVendor\MediaBundle\Entity\Media
+    #    gallery: MyVendor\MediaBundle\Entity\Gallery
+    #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
+    default_context: default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 100, quality: 70 }
+                big:   { width: 500, quality: 70 }
+        category:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                small: { width: 50, quality: 70 }
+                regular: { width: 100, quality: 70 }
+    providers:
+        image:
+            resizer: sonata.media.resizer.square
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false

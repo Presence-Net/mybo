@@ -66,7 +66,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface {
 
         $repository = $this->container->get('doctrine')->getManager()->getRepository('Gedmo\\Translatable\\Entity\\Translation');
 
-        $lang = 'fr_CA';
+        $lang = 'fr';
         $domain = 'messages';
 
         $entity = new Category();

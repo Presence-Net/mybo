@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -40,21 +41,36 @@ class Category implements Translatable
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Gedmo\Translatable
      */
-    private $description;
+    private $description = null;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="rank", type="integer")
      */
-    private $rank;
+    private $rank = 0;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isDefault", type="boolean")
+     * @ORM\Column(name="isDefault", type="boolean", nullable=true)
      */
-    private $isDefault = 0;
+    private $isDefault = false;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isHidden", type="boolean", nullable=true)
+     */
+    private $isHidden = false;
+    
+    /**
+     *
+     * @var Category 
+     * 
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", cascade={"all"}, fetch="LAZY")
+     */
+    private $parent = null;
 
     /**
      * @Gedmo\Locale
@@ -62,7 +78,32 @@ class Category implements Translatable
      * this is not a mapped field of entity metadata, just a simple property
      */
     private $locale;
+    
+    /**
+     * Sonata Media
+     *
+     * @var \Application\Sonata\MediaBundle\Entity\Media
+     * 
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"}, fetch="LAZY")
+     */
+    private $icon;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Operation", mappedBy="category")
+     */
+    private $operations;
 
+    
+    public function __construct() {
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function __toString() {
+        return $this->getName();
+    }
 
     /**
      * Get id
@@ -167,12 +208,91 @@ class Category implements Translatable
     }
     
     /**
+     * Set isHidden
+     *
+     * @param boolean $isHidden
+     * @return Category
+     */
+    public function setIsHidden($isHidden)
+    {
+        $this->isHidden = $isHidden;
+
+        return $this;
+    }
+
+    /**
+     * Get isHidden
+     *
+     * @return boolean 
+     */
+    public function getIsHidden()
+    {
+        return $this->isHidden;
+    }
+    
+    /**
+     * Set parent
+     *
+     * @param Category $parent
+     * @return Category
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return Category 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param Media $icon
+     * @return Category
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return Media 
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
      * 
      * @param type $locale
      */
     public function setTranslatableLocale($locale)
     {
         $this->locale = $locale;
+    }
+    
+    /**
+     * Get the operations
+     * 
+     * @return ArrayCollection
+     */
+    public function getOperations()
+    {
+        return $this->operations;
     }
 
 }

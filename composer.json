@@ -35,7 +35,12 @@
         "friendsofsymfony/jsrouting-bundle": "^1.5",
         "twig/extensions": "^1.2",
         "doctrine/migrations": "^1.0",
-        "doctrine/doctrine-migrations-bundle": "^1.0"
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "sonata-project/admin-bundle": "~2.3",
+        "sonata-project/doctrine-orm-admin-bundle": "~2.3",
+        "sonata-project/media-bundle": "~2.3",
+        "jms/serializer-bundle": "~0.11",
+        "sonata-project/intl-bundle": "^2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

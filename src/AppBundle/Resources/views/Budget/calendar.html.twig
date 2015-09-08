@@ -10,7 +10,7 @@
                         <div class="active content">
                             <div class="ui list">
                                 <div class="item">
-                                    <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/small/veronika.jpg">
+                                    <img class="ui icon image" src="http://semantic-ui.com/images/avatar/small/veronika.jpg">
                                     <div class="content">
                                         <a class="header">Salary</a>
                                         <div class="description">My biweekly salary</div>
@@ -23,21 +23,21 @@
                         <div class="content">
                             <div class="ui list">
                                 <div class="item">
-                                    <img class="ui avatar image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
+                                    <img class="ui icon image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
                                     <div class="content">
                                         <a class="header">Car insurance</a>
                                         <div class="description">La Capitale</div>
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <img class="ui avatar image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
+                                    <img class="ui icon image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
                                     <div class="content">
                                         <a class="header">Cell phone</a>
                                         <div class="description">Virgin Mobile</div>
                                     </div>
                                 </div>
                                 <div class="item">
-                                    <img class="ui avatar image" src="http://semantic-ui.com/images/avatar2/small/matthew.png">
+                                    <img class="ui icon image" src="http://semantic-ui.com/images/avatar2/small/matthew.png">
                                     <div class="content">
                                         <a class="header">Internet</a>
                                         <div class="description">Teksavvy</div>
@@ -103,6 +103,7 @@
                                     <div class="seven column week row equal height">
                                         {% set count = 0 %}
                                         {% for date, day in calendar.getData %}
+                                            {#{ dump(day) }#}
                                             {% set isCurrentMonth = day.date.format('m') == calendar.getDate.format('m') %}
                                             {% set isWeekendDay = day.date.format('w') == 0 or day.date.format('w') == 6 %}
                                             {% set isToday = day.date.format('Y-m-d') == calendar.getToday.format('Y-m-d') %}
@@ -127,48 +128,15 @@
                                                         <div class="ui list">
                                                             {% for op in day.operations %}
                                                             <div class="item">
-                                                                <img class="ui avatar image" src="{{ op.avatar }}">
+                                                                {% if op.icon %}
+                                                                <img class="ui icon image" src="{{ op.icon }}">
+                                                                {% endif %}
                                                                 <div class="content">
                                                                     <a class="header">{{ op.name }}</a>
-                                                                    <div class="description">{{ op.amount|localizedcurrency(app.user.getCurrency, app.user.getLocale) }}</div>
+                                                                    <div class="description">{{ op.amount|number_format }}</div>
                                                                 </div>
                                                             </div>
                                                             {% endfor %}
-                                                            <div class="item">
-                                                                <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/small/veronika.jpg">
-                                                                <div class="content">
-                                                                    <a class="header">Salary</a>
-                                                                    <div class="description">1,500 $</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="item">
-                                                                <img class="ui avatar image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
-                                                                <div class="content">
-                                                                    <a class="header">Car insurance</a>
-                                                                    <div class="description">1,500 $</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="item">
-                                                                <img class="ui avatar image" src="http://semantic-ui.com/images/avatar2/small/matthew.png">
-                                                                <div class="content">
-                                                                    <a class="header">Cell phone</a>
-                                                                    <div class="description">1,500 $</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="item">
-                                                                <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
-                                                                <div class="content">
-                                                                    <a class="header">Internet</a>
-                                                                    <div class="description">1,500 $</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="item">
-                                                                <img class="ui avatar image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
-                                                                <div class="content">
-                                                                    <a class="header">Internet</a>
-                                                                    <div class="description">1,500 $</div>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 {% endif %}
@@ -176,62 +144,6 @@
                                             {% set count = count + 1 %}
                                         {% endfor %}
                                     </div>
-                                    <!--
-                                    <div class="seven column week row equal height">
-                                        <div class="column day other-month weekend-day">31</div>
-                                        <div class="column day current-month">
-                                            <div class="date">1</div>
-                                            <div class="operations">
-                                                <div class="ui list">
-                                                    <div class="item">
-                                                        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/small/veronika.jpg">
-                                                        <div class="content">
-                                                            <a class="header">Salary</a>
-                                                            <div class="description">1,500 $</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item">
-                                                        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
-                                                        <div class="content">
-                                                            <a class="header">Car insurance</a>
-                                                            <div class="description">1,500 $</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item">
-                                                        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar2/small/matthew.png">
-                                                        <div class="content">
-                                                            <a class="header">Cell phone</a>
-                                                            <div class="description">1,500 $</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item">
-                                                        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/small/jenny.jpg">
-                                                        <div class="content">
-                                                            <a class="header">Internet</a>
-                                                            <div class="description">1,500 $</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item">
-                                                        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
-                                                        <div class="content">
-                                                            <a class="header">Internet</a>
-                                                            <div class="description">1,500 $</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="options">
-                                                <div class="ui icon mini button tutorial" data-tutorial-step="2" data-tutorial-step-position="bottom center" data-tutorial-step-title="Step 2" data-tutorial-step-content="You can also add new operations directly on your calendar for a specific day."><i class="plus icon"></i></div>
-                                                <div class="ui icon mini button"><i class="line chart icon"></i></div>
-                                            </div>
-                                        </div>
-                                        <div class="column day current-month">2</div>
-                                        <div class="column day current-month">3</div>
-                                        <div class="column day current-month">4</div>
-                                        <div class="column day current-month">5</div>
-                                        <div class="column day current-month weekend-day">6</div>
-                                    </div>
-                                    -->
                                 </div>
                             </div>
                         </div>
@@ -247,15 +159,16 @@
                                     <tbody>
                                         <tr class="center aligned">
                                             <td>Previous balance</td>
-                                            <td class="right aligned positive">1,671.26 $</td>
+                                            <td class="right aligned {% if calendar.getPreviousBalance < 0 %}negative{% endif %}{% if calendar.getPreviousBalance > 0 %}positive{% endif %}">{{ calendar.getPreviousBalance|number_format(2) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Balance variation</td>
-                                            <td class="right aligned negative">-26.02 $</td>
+                                            {% set balanceVariation = calendar.getClosingBalance - calendar.getPreviousBalance %}
+                                            <td class="right aligned {% if balanceVariation < 0 %}negative{% endif %}{% if balanceVariation > 0 %}positive{% endif %}">{{ balanceVariation|number_format(2) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Closing balance</td>
-                                            <td class="right aligned positive">1,697.28 $</td>
+                                            <td class="right aligned {% if calendar.getClosingBalance < 0 %}negative{% endif %}{% if calendar.getClosingBalance > 0 %}positive{% endif %}">{{ calendar.getClosingBalance|number_format(2) }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -264,7 +177,7 @@
                                 </div>
                             </div>
                             <div class="twelve wide column">
-                                <canvas id="myChart" width="400" height="400"></canvas>
+                                <canvas id="myChart" style="width: 100%; height: 200px"></canvas>
                             </div>
                         </div>
                     </div>
@@ -280,7 +193,6 @@
     <script>
 
         $(function () {
-
             if (!$.cookie('tutorial')) {
                 $('.tutorial').tutorial();
             }
@@ -296,24 +208,18 @@
                 .popup()
             ;
 
+            {% set calendarChartData = calendar.getChart %}
             var data = {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                scaleBeginAtZero: false,
+                labels: {{ calendarChartData.labels|json_encode()|raw }},
                 datasets: [
                     {
-                        label: "My First dataset",
+                        //label: "My First dataset",
                         fillColor: "rgba(220,220,220,0.5)",
                         strokeColor: "rgba(220,220,220,0.8)",
                         highlightFill: "rgba(220,220,220,0.75)",
                         highlightStroke: "rgba(220,220,220,1)",
-                        data: [65, 59, 80, 81, 56, 55, 40]
-                    },
-                    {
-                        label: "My Second dataset",
-                        fillColor: "rgba(151,187,205,0.5)",
-                        strokeColor: "rgba(151,187,205,0.8)",
-                        highlightFill: "rgba(151,187,205,0.75)",
-                        highlightStroke: "rgba(151,187,205,1)",
-                        data: [28, 48, 40, 19, 86, 27, 90]
+                        data: {{ calendarChartData.values|json_encode()|raw }}
                     }
                 ]
             };

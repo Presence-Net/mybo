@@ -33,13 +33,9 @@ class BudgetController extends Controller {
      * @Template()
      */
     public function calendarAction(Request $request, $year = null, $month = null) {
-        $date = new \DateTime('now');
-        $year = $year ? $year : $date->format('Y');
-        $month = $month ? $month : $date->format('m');
-        $day = $date->format('d');
-
-        $calendar = new Calendar("{$year}-{$month}-{$day}");
-
+        $calendar = $this->container->get('app.calendar');
+        $calendar->initCalendar($year, $month);
+        
         return array(
             'calendar' => $calendar,
         );

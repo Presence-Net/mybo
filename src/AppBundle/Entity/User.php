@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -55,11 +56,18 @@ class User extends BaseUser
      * )
      */
     private $last_name;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Operation", mappedBy="user")
+     */
+    private $operations;
 
+    
     public function __construct()
     {
         parent::__construct();
         // your own logic
+        $this->operations = new ArrayCollection();
     }
 
     /**
@@ -135,4 +143,15 @@ class User extends BaseUser
 
         return $this;
     }
+    
+    /**
+     * Get the operations
+     * 
+     * @return ArrayCollection
+     */
+    public function getOperations()
+    {
+        return $this->operations;
+    }
+
 }

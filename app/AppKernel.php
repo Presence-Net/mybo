@@ -40,9 +40,20 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle,
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle,
+            new JMS\SerializerBundle\JMSSerializerBundle(),
 
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
+
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
             
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+
             new AppBundle\AppBundle(),
         );
 
