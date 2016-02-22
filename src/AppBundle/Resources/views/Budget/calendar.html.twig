@@ -85,7 +85,7 @@
                                                                 {% endif %}
                                                                 <div class="content">
                                                                     <a class="header">{{ operation.name }}</a>
-                                                                    <div class="description">{{ operation.amount|number_format }}</div>
+                                                                    <div class="description">{{ operation.amount|localizedcurrency(app.user.currency) }}</div>
                                                                 </div>
                                                             </div>
                                                             {% endfor %}
@@ -111,16 +111,16 @@
                                     <tbody>
                                         <tr class="center aligned">
                                             <td>Starting balance</td>
-                                            <td class="right aligned {% if calendar.getPreviousBalance < 0 %}negative{% endif %}{% if calendar.getPreviousBalance > 0 %}positive{% endif %}">{{ calendar.getPreviousBalance|number_format(2) }}</td>
+                                            <td class="right aligned {% if calendar.getPreviousBalance < 0 %}negative{% endif %}{% if calendar.getPreviousBalance > 0 %}positive{% endif %}">{{ calendar.getPreviousBalance|localizedcurrency(app.user.currency) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Closing balance</td>
-                                            <td class="right aligned {% if calendar.getClosingBalance < 0 %}negative{% endif %}{% if calendar.getClosingBalance > 0 %}positive{% endif %}">{{ calendar.getClosingBalance|number_format(2) }}</td>
+                                            <td class="right aligned {% if calendar.getClosingBalance < 0 %}negative{% endif %}{% if calendar.getClosingBalance > 0 %}positive{% endif %}">{{ calendar.getClosingBalance|localizedcurrency(app.user.currency) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Balance variation</td>
                                             {% set balanceVariation = calendar.getClosingBalance - calendar.getPreviousBalance %}
-                                            <td class="right aligned {% if balanceVariation < 0 %}negative{% endif %}{% if balanceVariation > 0 %}positive{% endif %}">{{ balanceVariation|number_format(2) }}</td>
+                                            <td class="right aligned {% if balanceVariation < 0 %}negative{% endif %}{% if balanceVariation > 0 %}positive{% endif %}">{{ balanceVariation|localizedcurrency(app.user.currency) }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

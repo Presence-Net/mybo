@@ -57,6 +57,33 @@
 								{{ form_errors(form.plainPassword.second) }}
 							</div>
 						</div>
+						<div class="two column row">
+							<div class="column">
+								{{ form_label(form.country) }}
+							</div>
+							<div class="column">
+								{{ form_widget(form.country) }}
+								{{ form_errors(form.country) }}
+							</div>
+						</div>
+						<div class="two column row">
+							<div class="column">
+								{{ form_label(form.locale) }}
+							</div>
+							<div class="column">
+								{{ form_widget(form.locale) }}
+								{{ form_errors(form.locale) }}
+							</div>
+						</div>
+						<div class="two column row">
+							<div class="column">
+								{{ form_label(form.currency) }}
+							</div>
+							<div class="column">
+								{{ form_widget(form.currency) }}
+								{{ form_errors(form.currency) }}
+							</div>
+						</div>
 						<div class="one column centered row">
 							<div class="aligned centered column">
 								<input type="submit" value="{{ 'registration.submit'|trans }}" class="ui button" />
