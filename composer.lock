@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "27ef2de67bc78aee024e57af831167e9",
-    "content-hash": "f9d41c3025319d1e22412969ce4ed89d",
+    "hash": "2d787bf704c6cd8ad82526985c67e763",
+    "content-hash": "4430816063ee8815b2b0d143970d4df9",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1698,17 +1698,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSDiExtraBundle.git",
-                "reference": "75816f382a2018be4b5a02ae3dfa5dd8c6c21b7c"
+                "reference": "fb2da6655761718bb61c1367ceafd9ff4f4bccc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSDiExtraBundle/zipball/75816f382a2018be4b5a02ae3dfa5dd8c6c21b7c",
-                "reference": "75816f382a2018be4b5a02ae3dfa5dd8c6c21b7c",
+                "url": "https://api.github.com/repos/schmittjoh/JMSDiExtraBundle/zipball/fb2da6655761718bb61c1367ceafd9ff4f4bccc1",
+                "reference": "fb2da6655761718bb61c1367ceafd9ff4f4bccc1",
                 "shasum": ""
             },
             "require": {
                 "jms/aop-bundle": "~1.1",
                 "jms/metadata": "~1.0",
+                "php": "~5.3|~7.0",
                 "symfony/dependency-injection": "~2.3|~3.0",
                 "symfony/finder": "~2.3|~3.0",
                 "symfony/framework-bundle": "~2.3|~3.0",
@@ -1719,7 +1720,7 @@
             "require-dev": {
                 "doctrine/doctrine-bundle": "~1.5",
                 "doctrine/orm": "~2.3",
-                "jms/security-extra-bundle": "~1.0@dev",
+                "jms/security-extra-bundle": "~1.0",
                 "phpcollection/phpcollection": ">=0.2,<0.3-dev",
                 "sensio/framework-extra-bundle": "~2.0|~3.0",
                 "symfony/browser-kit": "~2.3|~3.0",
@@ -1758,7 +1759,7 @@
                 "annotations",
                 "dependency injection"
             ],
-            "time": "2016-02-18 20:54:46"
+            "time": "2016-02-21 22:25:12"
         },
         {
             "name": "jms/i18n-routing-bundle",
@@ -1910,12 +1911,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSecurityExtraBundle.git",
-                "reference": "d70399b25f41afd8277335cedc3c9b3acdc3759d"
+                "reference": "f04ab951e35087e7d9a6cbbc4b3e8f4e5593f8b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSSecurityExtraBundle/zipball/d70399b25f41afd8277335cedc3c9b3acdc3759d",
-                "reference": "d70399b25f41afd8277335cedc3c9b3acdc3759d",
+                "url": "https://api.github.com/repos/schmittjoh/JMSSecurityExtraBundle/zipball/f04ab951e35087e7d9a6cbbc4b3e8f4e5593f8b4",
+                "reference": "f04ab951e35087e7d9a6cbbc4b3e8f4e5593f8b4",
                 "shasum": ""
             },
             "require": {
@@ -1978,7 +1979,7 @@
                 "secure",
                 "security"
             ],
-            "time": "2016-02-03 15:29:16"
+            "time": "2016-02-21 23:30:55"
         },
         {
             "name": "jms/serializer",
@@ -4320,16 +4321,16 @@
         },
         {
             "name": "symfony/assetic-bundle",
-            "version": "v2.7.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/assetic-bundle.git",
-                "reference": "d885ec8451d5a7b077bda81bb19ac9fbff9cdc76"
+                "reference": "aa5b4f8b712f38745928fa845ddb73300bb2af6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/d885ec8451d5a7b077bda81bb19ac9fbff9cdc76",
-                "reference": "d885ec8451d5a7b077bda81bb19ac9fbff9cdc76",
+                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/aa5b4f8b712f38745928fa845ddb73300bb2af6d",
+                "reference": "aa5b4f8b712f38745928fa845ddb73300bb2af6d",
                 "shasum": ""
             },
             "require": {
@@ -4386,24 +4387,99 @@
                 "compression",
                 "minification"
             ],
-            "time": "2015-11-17 09:45:47"
+            "time": "2015-12-28 13:12:39"
         },
         {
-            "name": "symfony/monolog-bundle",
-            "version": "v2.8.2",
+            "name": "symfony/intl",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "84785c4d44801c4dd82829fa2e1820cacfe2c46f"
+                "url": "https://github.com/symfony/intl.git",
+                "reference": "392597760169a4c9d3d1472130645ca887f8f3a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/84785c4d44801c4dd82829fa2e1820cacfe2c46f",
-                "reference": "84785c4d44801c4dd82829fa2e1820cacfe2c46f",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/392597760169a4c9d3d1472130645ca887f8f3a9",
+                "reference": "392597760169a4c9d3d1472130645ca887f8f3a9",
                 "shasum": ""
             },
             "require": {
-                "monolog/monolog": "~1.8",
+                "php": ">=5.5.9",
+                "symfony/polyfill-intl-icu": "~1.0"
+            },
+            "require-dev": {
+                "symfony/filesystem": "~2.8|~3.0"
+            },
+            "suggest": {
+                "ext-intl": "to use the component with locales other than \"en\""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Intl\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ],
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                },
+                {
+                    "name": "Eriksen Costa",
+                    "email": "eriksen.costa@infranology.com.br"
+                },
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "A PHP replacement layer for the C intl extension that includes additional data from the ICU library.",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "i18n",
+                "icu",
+                "internationalization",
+                "intl",
+                "l10n",
+                "localization"
+            ],
+            "time": "2016-02-04 12:57:09"
+        },
+        {
+            "name": "symfony/monolog-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/monolog-bundle.git",
+                "reference": "c25e740ae9addc7309090122229929e84a3b9ba1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/c25e740ae9addc7309090122229929e84a3b9ba1",
+                "reference": "c25e740ae9addc7309090122229929e84a3b9ba1",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": "~1.12",
                 "php": ">=5.3.2",
                 "symfony/config": "~2.3|~3.0",
                 "symfony/dependency-injection": "~2.3|~3.0",
@@ -4445,7 +4521,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2015-11-17 10:02:29"
+            "time": "2016-02-01 10:54:01"
         },
         {
             "name": "symfony/polyfill-intl-icu",
@@ -4905,7 +4981,7 @@
         },
         {
             "name": "symfony/swiftmailer-bundle",
-            "version": "v2.3.11",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/swiftmailer-bundle.git",
@@ -5254,24 +5330,23 @@
         },
         {
             "name": "willdurand/js-translation-bundle",
-            "version": "v2.1.4",
+            "version": "v2.1.0",
             "target-dir": "Bazinga/Bundle/JsTranslationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaJsTranslationBundle.git",
-                "reference": "5f19f8bf5c8494da2916283c53f215d77ea5f666"
+                "reference": "c78a691faabb8d0933a8791217937a7052d890a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/5f19f8bf5c8494da2916283c53f215d77ea5f666",
-                "reference": "5f19f8bf5c8494da2916283c53f215d77ea5f666",
+                "url": "https://api.github.com/repos/willdurand/BazingaJsTranslationBundle/zipball/c78a691faabb8d0933a8791217937a7052d890a9",
+                "reference": "c78a691faabb8d0933a8791217937a7052d890a9",
                 "shasum": ""
             },
             "require": {
                 "symfony/console": "~2.3",
                 "symfony/finder": "~2.3",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/intl": "~2.3"
+                "symfony/framework-bundle": "~2.3"
             },
             "replace": {
                 "willdurand/expose-translation-bundle": "2.1.*"
@@ -5299,7 +5374,8 @@
             "authors": [
                 {
                     "name": "William Durand",
-                    "email": "william.durand1@gmail.com"
+                    "email": "william.durand1@gmail.com",
+                    "homepage": "http://www.willdurand.fr"
                 }
             ],
             "description": "A pretty nice way to expose your translation messages to your JavaScript.",
@@ -5308,7 +5384,7 @@
                 "symfony",
                 "translation"
             ],
-            "time": "2014-11-03 10:27:20"
+            "time": "2014-04-25 07:37:14"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -5510,6 +5586,10 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "symfony/assetic-bundle": 20,
+        "symfony/swiftmailer-bundle": 20,
+        "symfony/monolog-bundle": 20,
+        "symfony/intl": 20,
         "friendsofsymfony/user-bundle": 20,
         "jms/di-extra-bundle": 20,
         "jms/security-extra-bundle": 20,
