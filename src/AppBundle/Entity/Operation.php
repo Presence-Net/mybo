@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
-use Gedmo\Translatable\Translatable;
-
 /**
  * Operation
  *
@@ -93,7 +91,7 @@ class Operation
     /**
      * @var string
      *
-     * @ORM\Column(name="recurrence", type="string", length=255, nullable=true)
+     * @ORM\Column(name="recurrence", type="string", length=255)
      */
     private $recurrence;
 

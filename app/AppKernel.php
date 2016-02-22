@@ -5,15 +5,14 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 
-class AppKernel extends Kernel
-{
+class AppKernel extends Kernel {
+
     public function init() {
-        date_default_timezone_set( 'America/New_York' );
+        date_default_timezone_set('America/New_York');
         parent::init();
     }
 
-    public function registerBundles()
-    {
+    public function registerBundles() {
         $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -25,25 +24,19 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle,
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle,
-            
             new Sp\BowerBundle\SpBowerBundle(),
-
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-
             new Lunetics\LocaleBundle\LuneticsLocaleBundle(),
-
             new JMS\AopBundle\JMSAopBundle,
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle,
             new JMS\SerializerBundle\JMSSerializerBundle(),
-
+            new JMS\TranslationBundle\JMSTranslationBundle(),
+            //new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
-
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
@@ -51,9 +44,7 @@ class AppKernel extends Kernel
             new Sonata\MediaBundle\SonataMediaBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
-            
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
-
             new AppBundle\AppBundle(),
         );
 
@@ -68,8 +59,8 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
-    {
-        $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+    public function registerContainerConfiguration(LoaderInterface $loader) {
+        $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
     }
+
 }

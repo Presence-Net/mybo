@@ -12,6 +12,8 @@ use AppBundle\Entity\Operation;
 
 class OperationAdmin extends Admin
 {
+    protected $translationDomain = 'SonataPageBundle'; // default is 'messages'
+    
     var $recurrenceChoices = [
         Operation::RECUR_ADJUSTBALANCE => Operation::RECUR_ADJUSTBALANCE,
         Operation::RECUR_ONCE => Operation::RECUR_ONCE,
@@ -31,8 +33,8 @@ class OperationAdmin extends Admin
             ->add('category')
             ->add('name')
             ->add('amount')
-            ->add('startDate', null, [], 'date')
-            ->add('endDate', null, [], 'date')
+            ->add('startDate', null, [], 'sonata_type_date_picker')
+            ->add('endDate', null, [], 'sonata_type_date_picker')
             ->add('recurrence', null, [], 'choice', array(
                 'choices' => $this->recurrenceChoices,
             ))
@@ -48,9 +50,7 @@ class OperationAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('user')
-            ->add('category')
+            ->add('icon')
             ->add('name')
             ->add('description')
             ->add('amount')
@@ -60,6 +60,8 @@ class OperationAdmin extends Admin
             ->add('recurrenceInterval')
             ->add('count')
             ->add('days')
+            ->add('user')
+            ->add('category')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -79,16 +81,17 @@ class OperationAdmin extends Admin
             ->add('user')
             ->add('category')
             ->add('name')
-            ->add('description')
+            ->add('description', 'text', array('required' => false))
             ->add('amount')
-            ->add('startDate')
-            ->add('endDate')
+            ->add('startDate', 'sonata_type_date_picker')
+            ->add('endDate', 'sonata_type_date_picker', array('required' => false))
             ->add('recurrence', 'choice', array(
                 'choices' => $this->recurrenceChoices,
             ))
             ->add('recurrenceInterval')
             ->add('count')
-            ->add('days')
+            ->add('days', 'text', array('required' => false))
+            ->add('icon', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'operation')))
         ;
     }
 

@@ -1,0 +1,27 @@
+<form action="{{ path('budget_' ~ calendar_route_suffix) }}" method="GET" class="ui form">
+    <div class="ui pagination menu calendar-nav">
+        <a class="icon item" data-content="{{ 'Previous year'|trans }}" href="{{ path('budget_' ~ calendar_route_suffix, {year: calendar.previousYear.format('Y'), month: calendar.previousYear.format('m')}) }}"><i class="angle double left icon"></i></a>
+        <a class="icon item" data-content="{{ 'Previous month'|trans }}" href="{{ path('budget_' ~ calendar_route_suffix, {year: calendar.previousMonth.format('Y'), month: calendar.previousMonth.format('m')}) }}"><i class="angle left icon"></i></a>
+        <a class="item" href="{{ path('budget_' ~ calendar_route_suffix) }}">Today</a>
+        <a class="item dropdown">
+            <select name="month">
+                {% set months = [
+                    'Jan'|trans,'Feb'|trans,'Mar'|trans,'Apr'|trans,'May'|trans,'Jun'|trans,
+                    'Jul'|trans,'Aug'|trans,'Sep'|trans,'Oct'|trans,'Nov'|trans,'Dec'|trans,
+                ] %}
+                {% for month in range(1, 12) %}
+                    <option value="{{ "%02d"|format(month) }}"{% if month == calendar.date.format('m') %} selected="selected"{% endif %}>{{ months[month - 1] }}</option>
+                {% endfor %}
+            </select>
+        </a>
+        <a class="item dropdown">
+            <select name="year">
+                {% for year in range(calendar.date.format('Y') - 5, calendar.date.format('Y') + 5) %}
+                    <option value="{{ year }}"{% if year == calendar.date.format('Y') %} selected="selected"{% endif %}>{{ year }}</option>
+                {% endfor %}
+            </select>
+        </a>
+        <a class="icon item" data-content="{{ 'Next month'|trans }}" href="{{ path('budget_' ~ calendar_route_suffix, {year: calendar.nextMonth.format('Y'), month: calendar.nextMonth.format('m')}) }}"><i class="angle right icon"></i></a>
+        <a class="icon item" data-content="{{ 'Next year'|trans }}" href="{{ path('budget_' ~ calendar_route_suffix, {year: calendar.nextYear.format('Y'), month: calendar.nextYear.format('m')}) }}"><i class="angle double right icon"></i></a>
+    </div>
+</form>

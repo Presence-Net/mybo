@@ -4,53 +4,29 @@
     <div class="ui grid">
         <div class="row">
             <div class="three wide column">
-                <div class="ui segment ops tutorial" data-tutorial-step="1" data-tutorial-step-position="right center" data-tutorial-step-title="Step 1" data-tutorial-step-content="Add new operations to your budget.">
+                <div class="ui segment ops tutorial" data-tutorial-step="1" data-tutorial-step-position="right center" data-tutorial-step-title="Step 1 - Add operation (method 1)" data-tutorial-step-content="Add new operations to your budget.">
                     <div class="ui accordion">
-                        <div class="active title"><i class="dropdown icon"></i> Revenues</div>
-                        <div class="active content">
+                        {% for category in calendar.getCategories %}
+                            {% if category.isHidden != true %}
+                        <div class="{% if category.isDefault %}active {% endif %}title"><i class="dropdown icon"></i> {{ category.name }}</div>
+                        <div class="{% if category.isDefault %}active {% endif %}content">
                             <div class="ui list">
+                                {% for operation in category.getOperations(category.id) %}
                                 <div class="item">
-                                    <img class="ui icon image" src="http://semantic-ui.com/images/avatar/small/veronika.jpg">
+                                    {% if operation.icon is not null %}
+                                    <img class="ui icon image" src="{% path operation.icon, 'small' %}">
+                                    {% endif %}
                                     <div class="content">
-                                        <a class="header">Salary</a>
-                                        <div class="description">My biweekly salary</div>
+                                        <a class="header">{{ operation.name }}</a>
+                                        <div class="description">{{ operation.description }}</div>
                                     </div>
                                 </div>
+                                {% endfor %}
                             </div>
                             <div class="ui primary mini button"><i class="plus icon"></i> Add new operation</div>
                         </div>
-                        <div class="title"><i class="dropdown icon"></i> Expenses</div>
-                        <div class="content">
-                            <div class="ui list">
-                                <div class="item">
-                                    <img class="ui icon image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
-                                    <div class="content">
-                                        <a class="header">Car insurance</a>
-                                        <div class="description">La Capitale</div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <img class="ui icon image" src="http://semantic-ui.com/images/avatar2/small/rachel.png">
-                                    <div class="content">
-                                        <a class="header">Cell phone</a>
-                                        <div class="description">Virgin Mobile</div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <img class="ui icon image" src="http://semantic-ui.com/images/avatar2/small/matthew.png">
-                                    <div class="content">
-                                        <a class="header">Internet</a>
-                                        <div class="description">Teksavvy</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ui primary mini button"><i class="plus icon"></i> Add new operation</div>
-                        </div>
-                        <div class="title"><i class="dropdown icon"></i> Savings</div>
-                        <div class="content">
-                            <p>No operations.</p>
-                            <div class="ui primary mini button"><i class="plus icon"></i> Add new operation</div>
-                        </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -59,33 +35,7 @@
                     <div class="ui padded grid">
                         <div class="row">
                             <div class="sixteen wide center aligned column">
-                                <form class="ui form">
-                                    <div class="ui pagination menu calendar-nav">
-                                        <a class="icon item" data-content="{{ 'Previous year'|trans }}" href="{{ path('budget_calendar', {year: calendar.previousYear.format('Y'), month: calendar.previousYear.format('m')}) }}"><i class="angle double left icon"></i></a>
-                                        <a class="icon item" data-content="{{ 'Previous month'|trans }}" href="{{ path('budget_calendar', {year: calendar.previousMonth.format('Y'), month: calendar.previousMonth.format('m')}) }}"><i class="angle left icon"></i></a>
-                                        <a class="item" href="{{ path('budget_calendar') }}">Today</a>
-                                        <a class="item dropdown">
-                                            <select name="month">
-                                                {% set months = [
-                                                    'Jan'|trans,'Feb'|trans,'Mar'|trans,'Apr'|trans,'May'|trans,'Jun'|trans,
-                                                    'Jul'|trans,'Aug'|trans,'Sep'|trans,'Oct'|trans,'Nov'|trans,'Dec'|trans,
-                                                ] %}
-                                                {% for month in range(1, 12) %}
-                                                    <option value="{{ "%02d"|format(month) }}"{% if month == calendar.date.format('m') %} selected="selected"{% endif %}>{{ months[month - 1] }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </a>
-                                        <a class="item dropdown">
-                                            <select name="year">
-                                                {% for year in range(calendar.date.format('Y') - 5, calendar.date.format('Y') + 5) %}
-                                                    <option value="{{ year }}"{% if year == calendar.date.format('Y') %} selected="selected"{% endif %}>{{ year }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </a>
-                                        <a class="icon item" data-content="{{ 'Next month'|trans }}" href="{{ path('budget_calendar', {year: calendar.nextMonth.format('Y'), month: calendar.nextMonth.format('m')}) }}"><i class="angle right icon"></i></a>
-                                        <a class="icon item" data-content="{{ 'Next year'|trans }}" href="{{ path('budget_calendar', {year: calendar.nextYear.format('Y'), month: calendar.nextYear.format('m')}) }}"><i class="angle double right icon"></i></a>
-                                    </div>
-                                </form>
+                                {% include 'AppBundle:Budget:calendar_nav.html.twig' %}'
                             </div>
                         </div>
                         <div class="row">
@@ -107,6 +57,7 @@
                                             {% set isCurrentMonth = day.date.format('m') == calendar.getDate.format('m') %}
                                             {% set isWeekendDay = day.date.format('w') == 0 or day.date.format('w') == 6 %}
                                             {% set isToday = day.date.format('Y-m-d') == calendar.getToday.format('Y-m-d') %}
+                                            {% set isFirstDay = day.date.format('j') == 1 %}
                                             {% if count % 7 == 0 %}
                                             </div>
                                             <div class="seven column week row equal height">
@@ -115,10 +66,11 @@
                                                  {% if isCurrentMonth %} current-month{% else %}other-month{% endif %}
                                                  {% if isWeekendDay %} weekend-day{% endif %} 
                                                  {% if isToday %} current-day{% endif %}
+                                                 {% if isFirstDay %} first-day{% endif %}
                                                  ">
                                                 {% if isCurrentMonth %}
                                                     <div class="options">
-                                                        <div class="ui icon mini button tutorial"><i class="plus icon"></i></div>
+                                                        <div class="ui icon mini button {% if isFirstDay %}tutorial{% endif %}" {% if isFirstDay %}data-tutorial-step="2" data-tutorial-step-position="right center" data-tutorial-step-title="Step 1 - Add operation (method 2)" data-tutorial-step-content="You can also add operations for a specific day directly here."{% endif %}><i class="plus icon"></i></div>
                                                         <div class="ui icon mini button"><i class="line chart icon"></i></div>
                                                     </div>
                                                 {% endif %}
@@ -126,14 +78,14 @@
                                                 {% if day.operations|length > 0 or isToday %}
                                                     <div class="operations">
                                                         <div class="ui list">
-                                                            {% for op in day.operations %}
+                                                            {% for operation in day.operations %}
                                                             <div class="item">
-                                                                {% if op.icon %}
-                                                                <img class="ui icon image" src="{{ op.icon }}">
+                                                                {% if operation.icon is not null %}
+                                                                <img class="ui icon image" src="{% path operation.icon, 'small' %}">
                                                                 {% endif %}
                                                                 <div class="content">
-                                                                    <a class="header">{{ op.name }}</a>
-                                                                    <div class="description">{{ op.amount|number_format }}</div>
+                                                                    <a class="header">{{ operation.name }}</a>
+                                                                    <div class="description">{{ operation.amount|number_format }}</div>
                                                                 </div>
                                                             </div>
                                                             {% endfor %}
@@ -158,17 +110,17 @@
                                     </thead>
                                     <tbody>
                                         <tr class="center aligned">
-                                            <td>Previous balance</td>
+                                            <td>Starting balance</td>
                                             <td class="right aligned {% if calendar.getPreviousBalance < 0 %}negative{% endif %}{% if calendar.getPreviousBalance > 0 %}positive{% endif %}">{{ calendar.getPreviousBalance|number_format(2) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Closing balance</td>
+                                            <td class="right aligned {% if calendar.getClosingBalance < 0 %}negative{% endif %}{% if calendar.getClosingBalance > 0 %}positive{% endif %}">{{ calendar.getClosingBalance|number_format(2) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Balance variation</td>
                                             {% set balanceVariation = calendar.getClosingBalance - calendar.getPreviousBalance %}
                                             <td class="right aligned {% if balanceVariation < 0 %}negative{% endif %}{% if balanceVariation > 0 %}positive{% endif %}">{{ balanceVariation|number_format(2) }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Closing balance</td>
-                                            <td class="right aligned {% if calendar.getClosingBalance < 0 %}negative{% endif %}{% if calendar.getClosingBalance > 0 %}positive{% endif %}">{{ calendar.getClosingBalance|number_format(2) }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -5,13 +5,12 @@
  */
 
 
-$(function(){
-    $('.calendar-nav select').on('click', function(e){
+$(function () {
+    $('.calendar-nav select').on('click', function (e) {
         $form = $(this).closest('form');
-        url = Routing.generate('budget_calendar', {
-            year: $form.find('select[name=year]').val(),
-            month: $form.find('select[name=month]').val()
-        });
+        url = $form.attr('action') +
+                '/' + $form.find('select[name=year]').val() +
+                '/' + $form.find('select[name=month]').val()
         document.location.href = url;
     })
 });

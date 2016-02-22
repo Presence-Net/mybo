@@ -30,6 +30,8 @@ class Calendar {
     private $balanceAdjustments = [];
     private $calendarDateFormat = 'Ymd';
     private $calendarNavDateFormat = 'Ym';
+    
+    private $categories = [];
 
     public function __construct(ContainerInterface $container) {
         $this->container = $container;
@@ -124,6 +126,7 @@ class Calendar {
         $this->defineCalendarLimits();
         $this->defineCalendarNav();
         $this->defineCalendarDays();
+        $this->loadCategories();
         $this->loadOperations();
         $this->buildCalendarData();
         $this->updateBalanceHistory();
@@ -138,10 +141,17 @@ class Calendar {
         if ($this->startDate->format('w') > 0) { // Not a Sunday
             $this->startDate->modify('last sunday');
         }
+        if ($this->startDate->format('j') == 1) { // First day of the month
+            $this->startDate->modify('7 days ago');
+        }
+        $this->startDate->setTime(0, 0, 0);
 
         $this->endDate->modify('last day of this month');
         if ($this->endDate->format('w') < 6) { // Not a Saturday
             $this->endDate->modify('next saturday');
+        }
+        if ($this->endDate->format('j') == $this->endDate->format('t')) { // Last day of the month
+            $this->endDate->modify('+7 days');
         }
         $this->endDate->setTime(23, 59, 59);
     }
@@ -169,10 +179,20 @@ class Calendar {
                 'operations' => [],
                 'balance' => 0,
             ];
-            //$this->operations[] = $occ;
             $this->data[$day->format($this->calendarDateFormat)] = $occ;
-            //$this->dailyBalance[$day->format('Y-m-d')] = 0;
         }
+    }
+
+    public function loadCategories() {
+        $em = $this->container->get('doctrine')->getManager();
+
+        $repo = $em->getRepository('AppBundle:Category');
+
+        $this->categories = $repo->findAll(['order' => 'asc']);
+    }
+
+    public function getCategories() {
+        return $this->categories;
     }
 
     public function loadOperations() {
@@ -182,17 +202,27 @@ class Calendar {
 
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
-        $tmp_ops = [];
-
-        $this->operations = $repo->findByUser($user->getId(), ['category' => 'desc', 'name' => 'asc']);
+        $this->operations = $repo->findByUser($user->getId(), ['category' => 'asc', 'name' => 'asc']);
     }
 
-    public function getOperations() {
+    public function getOperations($category = null) {
+        if($category) {
+            $operations = [];
+            foreach($this->operations as $operation) {
+                if($operation->getCategory()->getId() == $category) {
+                    $operations[]  = $operation;
+                }
+            }
+            
+            return $operations;
+        }
+        
         return $this->operations;
     }
 
     public function buildCalendarData() {
         $this->balanceAdjustments = [];
+        $this->dailyBalance = [];
 
         /* @var $operation Operation */
         foreach ($this->operations as $operation) {
@@ -205,7 +235,10 @@ class Calendar {
 
                 // Generate operation occurences
                 $recur = new RecursableCalendar();
-                $recurrence = ($operation->getRecurrence() === Operation::RECUR_ADJUSTBALANCE) ? Operation::RECUR_DAILY : $operation->getRecurrence();
+                $recurrence = (
+                    $operation->getRecurrence() === Operation::RECUR_ADJUSTBALANCE
+                        || $operation->getRecurrence() === Operation::RECUR_ONCE
+                ) ? Operation::RECUR_DAILY : $operation->getRecurrence();
                 $recur->startDate($op_start)
                         ->freq($recurrence)
                         ->until($op_end)
@@ -221,23 +254,17 @@ class Calendar {
                     $operation->setDays(split(',', $operation->getDays()));
                     $recur->byday($operation->getDays());
                 }
-
+                
                 foreach ($recur->occurrences as $occ) {
                     $op = clone $operation;
-                    //$op_date = new \DateTime($occ->format('U'));
                     if ($op->hasModifications()) {
                         foreach ($op->getModifications() as $modification) {
-                            if ($modification->getNewAmount() !== null && $modification->getOldDate()->format($this->calendarDateFormat) === $occ->format($this->calendarDateFormat)) {
+                            $occurenceHasModification = ($modification->getOldDate()->format($this->calendarDateFormat) === $occ->format($this->calendarDateFormat));
+                            if ($occurenceHasModification && $modification->getNewAmount() !== null) {
                                 $op->setAmount($modification->getNewAmount());
                             }
-                            //if ($modification->getNewDate() !== null && date('U', strtotime($modification['date_new'])) > 0) {
-                            if ($modification->getNewDate() !== null) {
-                                //$op_date_old = date('U', strtotime($modification['date_old']));
-                                //$op_date_new = date('U', strtotime($modification['date_new']));
-                                if ($modification->getOldDate()->format($this->calendarDateFormat) == $op_date->format($this->calendarDateFormat)) {
-                                    //$op_date = $op_date_new;
-                                    $occ = $op_date_new;
-                                }
+                            if ($occurenceHasModification && $modification->getNewDate() !== null) {
+                                $occ = $modification->getNewDate();
                             }
                         }
                     }
@@ -247,17 +274,21 @@ class Calendar {
                     }
 
                     $daily_index = $occ->format($this->calendarDateFormat);
-                    if (!isset($this->dailyBalance[$daily_index]))
+                    if (!isset($this->dailyBalance[$daily_index])) {
                         $this->dailyBalance[$daily_index] = 0;
-                    //echo '$this->dailyBalance[' . $daily_index . '] = ' . $this->dailyBalance[$daily_index] . '+' . $this->dailyBalance[$daily_index] . '<br />' . PHP_EOL;
+                    }
                     $this->dailyBalance[$daily_index] += $op->getAmount();
 
-                    if ($occ->format($this->calendarDateFormat) >= $this->getStartDate()->format($this->calendarDateFormat) && $occ->format($this->calendarDateFormat) <= $this->getEndDate()->format($this->calendarDateFormat)) {
+                    if (
+                        $occ->format($this->calendarDateFormat) >= $this->getStartDate()->format($this->calendarDateFormat) && 
+                        $occ->format($this->calendarDateFormat) <= $this->getEndDate()->format($this->calendarDateFormat)
+                    ) {
                         $this->data[$occ->format($this->calendarDateFormat)]['operations'][] = $op;
                     }
                 }
             }
         }
+        ksort($this->dailyBalance);
     }
 
     public function updateBalanceHistory() {
@@ -267,12 +298,14 @@ class Calendar {
         $this->closingBalance = 0;
 
         $dailyBalance = [];
-
+        
         foreach ($this->dailyBalance as $balanceDate => $amount) {
             $balanceMonth = substr($balanceDate, 0, 6);
-            $isPreviousMonth = ($balanceMonth < $this->now->format($this->calendarNavDateFormat));
-            $isNextMonth = ($balanceMonth > $this->now->format($this->calendarNavDateFormat));
-            $isInCalendar = ($balanceDate >= $this->getStartDate()->format($this->calendarDateFormat) && $balanceDate <= $this->getEndDate()->format($this->calendarDateFormat));
+            $nowBalanceMonth = $this->date->format($this->calendarNavDateFormat);
+            $isPreviousMonth = $balanceMonth < $nowBalanceMonth;
+            $isNextMonth = $balanceMonth > $nowBalanceMonth;
+            $isInCalendar = $balanceDate >= $this->getStartDate()->format($this->calendarDateFormat) 
+                    && $balanceDate <= $this->getEndDate()->format($this->calendarDateFormat);
             // Check if has balance adjustment operation on given date
             if (isset($this->balanceAdjustments[$balanceDate])) {
                 $amount = $this->balanceAdjustments[$balanceDate];
@@ -316,6 +349,9 @@ class Calendar {
         $chartMaxValue = 0;
         foreach ($this->data as $index => $data) {
             $day = $data['date'];
+            $balanceMonth = substr($day->format($this->calendarNavDateFormat), 0, 6);
+            $nowBalanceMonth = $this->date->format($this->calendarNavDateFormat);
+            $isCurrentMonth = $balanceMonth === $nowBalanceMonth;
             if (isset($this->dailyBalance[$day->format($this->calendarDateFormat)])) {
                 $balance = $this->dailyBalance[$day->format($this->calendarDateFormat)];
             }
@@ -334,7 +370,7 @@ class Calendar {
             $colorTone = ($day->format('Ym') <> $this->now->format('Ym')) ? 'dark' : '';
             $balanceGraphDayData['color'] = $colorTone . $balanceGraphDayData['color'];
             $balanceGraphData[] = $balance;
-            $balanceGraphLabels[] = $day->format('d');
+            $balanceGraphLabels[] = $day->format('j');
             $count++;
         }
         $chartMinValue = floor($chartMinValue / 10) * 10;

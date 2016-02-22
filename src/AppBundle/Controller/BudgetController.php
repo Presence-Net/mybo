@@ -37,24 +37,47 @@ class BudgetController extends Controller {
         $calendar->initCalendar($year, $month);
         
         return array(
+            'calendar_route_suffix' => 'calendar',
             'calendar' => $calendar,
         );
     }
 
     /**
-     * @Route("/details", name="budget_details")
+     * @Route("/details/{year}/{month}", 
+     *  name="budget_details", 
+     *  requirements={"year" = "\d+", "month" = "\d+"}, 
+     *  defaults={"year" = null, "month" = null},
+     *  options={"expose"=true}
+     * )
      * @Template()
      */
-    public function detailsAction() {
-        return array();
+    public function detailsAction(Request $request, $year = null, $month = null) {
+        $calendar = $this->container->get('app.calendar');
+        $calendar->initCalendar($year, $month);
+        
+        return array(
+            'calendar_route_suffix' => 'details',
+            'calendar' => $calendar,
+        );
     }
 
     /**
-     * @Route("/summary", name="budget_summary")
+     * @Route("/details/{year}/{month}", 
+     *  name="budget_summary", 
+     *  requirements={"year" = "\d+", "month" = "\d+"}, 
+     *  defaults={"year" = null, "month" = null},
+     *  options={"expose"=true}
+     * )
      * @Template()
      */
-    public function summaryAction() {
-        return array();
+    public function summaryAction(Request $request, $year = null, $month = null) {
+        $calendar = $this->container->get('app.calendar');
+        $calendar->initCalendar($year, $month);
+        
+        return array(
+            'calendar_route_suffix' => 'summary',
+            'calendar' => $calendar,
+        );
     }
 
 }

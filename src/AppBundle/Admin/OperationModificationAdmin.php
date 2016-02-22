@@ -10,6 +10,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class OperationModificationAdmin extends Admin
 {
+    protected $translationDomain = 'SonataPageBundle'; // default is 'messages'
+    
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -19,8 +21,8 @@ class OperationModificationAdmin extends Admin
             ->add('id')
             ->add('user')
             ->add('operation')
-            ->add('oldDate', null, [], 'date')
-            ->add('newDate', null, [], 'date')
+            ->add('oldDate', null, [], 'sonata_type_date_picker')
+            ->add('newDate', null, [], 'sonata_type_date_picker')
             ->add('oldAmount')
             ->add('newAmount')
         ;
@@ -57,10 +59,10 @@ class OperationModificationAdmin extends Admin
         $formMapper
             ->add('user')
             ->add('operation')
-            ->add('oldDate')
-            ->add('newDate')
-            ->add('oldAmount')
-            ->add('newAmount')
+            ->add('oldDate', 'sonata_type_date_picker', array('required' => false))
+            ->add('newDate', 'sonata_type_date_picker', array('required' => false))
+            ->add('oldAmount', 'text', array('required' => false))
+            ->add('newAmount', 'text', array('required' => false))
         ;
     }
 

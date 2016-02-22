@@ -1,13 +1,24 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-                <div class="ui grid">
-                    <div class="row">
-                        <div class="column">
-                            <div class="ui segment">
+    <div class="ui grid">
+        <div class="row">
+            <div class="column">
+                <div class="ui segment">
+                    <div class="ui padded grid">
+                        <div class="row">
+                            <div class="sixteen wide center aligned column">
+                                {% include 'AppBundle:Budget:calendar_nav.html.twig' %}'
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="sixteen wide column">
                                 Content
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

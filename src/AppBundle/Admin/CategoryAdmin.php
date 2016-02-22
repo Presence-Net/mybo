@@ -10,6 +10,8 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class CategoryAdmin extends Admin
 {
+    protected $translationDomain = 'SonataPageBundle'; // default is 'messages'
+    
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -31,13 +33,12 @@ class CategoryAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
+            ->add('icon')
             ->add('name')
             ->add('description')
             ->add('rank')
             ->add('isDefault')
             ->add('isHidden')
-            ->add('icon')
             ->add('parent')
             ->add('_action', 'actions', array(
                 'actions' => array(
