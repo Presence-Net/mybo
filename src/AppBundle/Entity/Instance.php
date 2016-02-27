@@ -112,7 +112,7 @@ class Instance
      * @return type
      */
     public function __toString() {
-        return $this->getOperation()->getName();
+        return $this->getOperation() ? $this->getOperation()->getName() : '';
     }
 
     /**
