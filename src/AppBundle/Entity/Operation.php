@@ -11,18 +11,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Operation
  *
- * @ORM\Table(name="operations")
+ * @ORM\Table()
  * @ORM\Entity
  */
 class Operation
 {
-    const RECUR_ADJUSTBALANCE = 'adjustbalance';
-    const RECUR_ONCE = 'once';
-    const RECUR_DAILY = 'daily';
-    const RECUR_WEEKLY = 'weekly';
-    const RECUR_MONTHLY = 'monthly';
-    const RECUR_YEARLY = 'yearly';
-    
     /**
      * @var integer
      *
@@ -31,27 +24,6 @@ class Operation
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="operations")
-     */
-    private $user;
-
-    /**
-     * @var Category
-     *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="operations")
-     */
-    private $category;
-
-    /**
-     * @var OperationModification
-     *
-     * @ORM\OneToMany(targetEntity="OperationModification", mappedBy="operation")
-     */
-    private $modifications;
 
     /**
      * @var string
@@ -68,53 +40,25 @@ class Operation
     private $description;
 
     /**
-     * @var float
+     * @var User
      *
-     * @ORM\Column(name="amount", type="float")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="instances")
      */
-    private $amount = 0;
+    private $user;
 
     /**
-     * @var \DateTime
+     * @var Category
      *
-     * @ORM\Column(name="startDate", type="date")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="instances")
      */
-    private $startDate;
+    private $category;
 
     /**
-     * @var \DateTime
+     * @var Instance
      *
-     * @ORM\Column(name="endDate", type="date", nullable=true)
+     * @ORM\OneToMany(targetEntity="Instance", mappedBy="operation")
      */
-    private $endDate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="recurrence", type="string", length=255)
-     */
-    private $recurrence;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="recurrenceInterval", type="integer")
-     */
-    private $recurrenceInterval = 0;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="count", type="integer")
-     */
-    private $count = 0;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="days", type="string", length=255, nullable=true)
-     */
-    private $days;
+    private $instances;
 
     /**
      * @Gedmo\Locale
@@ -134,7 +78,7 @@ class Operation
 
     
     public function __construct() {
-        $this->modifications = new ArrayCollection();
+        $this->instances = new ArrayCollection();
     }
     
     /**
@@ -154,81 +98,6 @@ class Operation
     {
         return $this->id;
     }
-
-    /**
-     * Set user
-     *
-     * @param integer $user
-     * @return Operation
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return integer 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set category
-     *
-     * @param integer $category
-     * @return Operation
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return integer 
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    public function addModification($modification)
-    {
-        if(!$this->modifications->contains($modification))
-        {
-            $this->modifications[] = $modification;
-        }
-        
-        return $modification;
-    }
-    public function removeModification($modification)
-    {
-        if($this->modifications->contains($modification))
-        {
-            $this->modifications->removeElement($modification);
-        }
-        
-        return $this;
-    }
-    public function getModifications()
-    {
-        return $this->modifications;
-    }
-    
-    public function hasModifications()
-    {
-        return count($this->getModifications()) > 0;
-    }
-
 
     /**
      * Set name
@@ -277,164 +146,72 @@ class Operation
     }
 
     /**
-     * Set amount
+     * Set user
      *
-     * @param float $amount
-     * @return Operation
+     * @param integer $user
+     * @return Instance
      */
-    public function setAmount($amount)
+    public function setUser($user)
     {
-        $this->amount = $amount;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get amount
-     *
-     * @return float 
-     */
-    public function getAmount()
-    {
-        return $this->amount;
-    }
-
-    /**
-     * Set startDate
-     *
-     * @param \DateTime $startDate
-     * @return Operation
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-
-        return $this;
-    }
-
-    /**
-     * Get startDate
-     *
-     * @return \DateTime 
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * Set endDate
-     *
-     * @param \DateTime $endDate
-     * @return Operation
-     */
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    /**
-     * Get endDate
-     *
-     * @return \DateTime 
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * Set recurrence
-     *
-     * @param string $recurrence
-     * @return Operation
-     */
-    public function setRecurrence($recurrence)
-    {
-        $this->recurrence = $recurrence;
-
-        return $this;
-    }
-
-    /**
-     * Get recurrence
-     *
-     * @return string 
-     */
-    public function getRecurrence()
-    {
-        return $this->recurrence;
-    }
-
-    /**
-     * Set recurrenceInterval
-     *
-     * @param integer $recurrenceInterval
-     * @return Operation
-     */
-    public function setRecurrenceInterval($recurrenceInterval)
-    {
-        $this->recurrenceInterval = $recurrenceInterval;
-
-        return $this;
-    }
-
-    /**
-     * Get recurrenceInterval
+     * Get user
      *
      * @return integer 
      */
-    public function getRecurrenceInterval()
+    public function getUser()
     {
-        return $this->recurrenceInterval;
+        return $this->user;
     }
 
     /**
-     * Set count
+     * Set category
      *
-     * @param integer $count
-     * @return Operation
+     * @param integer $category
+     * @return Instance
      */
-    public function setCount($count)
+    public function setCategory($category)
     {
-        $this->count = $count;
+        $this->category = $category;
 
         return $this;
     }
 
     /**
-     * Get count
+     * Get category
      *
      * @return integer 
      */
-    public function getCount()
+    public function getCategory()
     {
-        return $this->count;
+        return $this->category;
     }
 
-    /**
-     * Set days
-     *
-     * @param string $days
-     * @return Operation
-     */
-    public function setDays($days)
+    public function addInstance($instance)
     {
-        $this->days = $days;
-
+        if(!$this->instances->contains($instance))
+        {
+            $this->instances[] = $instance;
+        }
+        
+        return $instance;
+    }
+    public function removeInstance($instance)
+    {
+        if($this->instances->contains($instance))
+        {
+            $this->instances->removeElement($instance);
+        }
+        
         return $this;
     }
-
-    /**
-     * Get days
-     *
-     * @return string 
-     */
-    public function getDays()
+    public function getInstances()
     {
-        return $this->days;
+        return $this->instances;
     }
 
     /**
@@ -468,5 +245,4 @@ class Operation
     {
         $this->locale = $locale;
     }
-
 }

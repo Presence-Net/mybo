@@ -226,68 +226,71 @@ class Calendar {
 
         /* @var $operation Operation */
         foreach ($this->operations as $operation) {
-            $op_start = $operation->getStartDate();
-            if ($op_start->format($this->calendarDateFormat) <= $this->endDate->format($this->calendarDateFormat)) {
-                $op_end = clone($this->getEndDate());
-                if ($operation->getEndDate() !== null) {
-                    $op_end = $operation->getEndDate();
-                }
+            foreach($operation->getInstances() as $instance) {
+                $op_start = $instance->getStartDate();
+                if ($op_start->format($this->calendarDateFormat) <= $this->endDate->format($this->calendarDateFormat)) {
+                    $op_end = clone($this->getEndDate());
+                    if ($instance->getEndDate() !== null) {
+                        $op_end = $instance->getEndDate();
+                    }
 
-                // Generate operation occurences
-                $recur = new RecursableCalendar();
-                $recurrence = (
-                    $operation->getRecurrence() === Operation::RECUR_ADJUSTBALANCE
-                        || $operation->getRecurrence() === Operation::RECUR_ONCE
-                ) ? Operation::RECUR_DAILY : $operation->getRecurrence();
-                $recur->startDate($op_start)
-                        ->freq($recurrence)
-                        ->until($op_end)
-                ;
-                if ($operation->getCount()) {
-                    $recur->count($operation->getCount());
-                }
-                if ($operation->getRecurrenceInterval() > 0) {
-                    $recur->interval($operation->getRecurrenceInterval());
-                }
-                $recur->generateOccurrences();
-                if ($operation->getDays() !== null) {
-                    $operation->setDays(split(',', $operation->getDays()));
-                    $recur->byday($operation->getDays());
-                }
-                
-                foreach ($recur->occurrences as $occ) {
-                    $op = clone $operation;
-                    if ($op->hasModifications()) {
-                        foreach ($op->getModifications() as $modification) {
-                            $occurenceHasModification = ($modification->getOldDate()->format($this->calendarDateFormat) === $occ->format($this->calendarDateFormat));
-                            if ($occurenceHasModification && $modification->getNewAmount() !== null) {
-                                $op->setAmount($modification->getNewAmount());
-                            }
-                            if ($occurenceHasModification && $modification->getNewDate() !== null) {
-                                $occ = $modification->getNewDate();
+                    // Generate instance occurences
+                    $recur = new RecursableCalendar();
+                    $recurrence = (
+                        $instance->getRecurrence() === Instance::RECUR_ADJUSTBALANCE
+                            || $instance->getRecurrence() === Instance::RECUR_ONCE
+                    ) ? Instance::RECUR_DAILY : $instance->getRecurrence();
+                    $recur->startDate($op_start)
+                            ->freq($recurrence)
+                            ->until($op_end)
+                    ;
+                    if ($instance->getCount()) {
+                        $recur->count($instance->getCount());
+                    }
+                    if ($instance->getRecurrenceInterval() > 0) {
+                        $recur->interval($instance->getRecurrenceInterval());
+                    }
+                    $recur->generateOccurrences();
+                    if ($instance->getDays() !== null) {
+                        $instance->setDays(split(',', $instance->getDays()));
+                        $recur->byday($instance->getDays());
+                    }
+
+                    foreach ($recur->occurrences as $occ) {
+                        $op = clone $instance;
+                        if ($op->hasModifications()) {
+                            foreach ($op->getModifications() as $modification) {
+                                $occurenceHasModification = ($modification->getOldDate()->format($this->calendarDateFormat) === $occ->format($this->calendarDateFormat));
+                                if ($occurenceHasModification && $modification->getNewAmount() !== null) {
+                                    $op->setAmount($modification->getNewAmount());
+                                }
+                                if ($occurenceHasModification && $modification->getNewDate() !== null) {
+                                    $occ = $modification->getNewDate();
+                                }
                             }
                         }
-                    }
 
-                    if ($op->getRecurrence() === Operation::RECUR_ADJUSTBALANCE) {
-                        $this->balanceAdjustments[$op_start->format($this->calendarDateFormat)] = $op->getAmount();
-                    }
+                        if ($op->getRecurrence() === Instance::RECUR_ADJUSTBALANCE) {
+                            $this->balanceAdjustments[$op_start->format($this->calendarDateFormat)] = $op->getAmount();
+                        }
 
-                    $daily_index = $occ->format($this->calendarDateFormat);
-                    if (!isset($this->dailyBalance[$daily_index])) {
-                        $this->dailyBalance[$daily_index] = 0;
-                    }
-                    $this->dailyBalance[$daily_index] += $op->getAmount();
+                        $daily_index = $occ->format($this->calendarDateFormat);
+                        if (!isset($this->dailyBalance[$daily_index])) {
+                            $this->dailyBalance[$daily_index] = 0;
+                        }
+                        $this->dailyBalance[$daily_index] += $op->getAmount();
 
-                    if (
-                        $occ->format($this->calendarDateFormat) >= $this->getStartDate()->format($this->calendarDateFormat) && 
-                        $occ->format($this->calendarDateFormat) <= $this->getEndDate()->format($this->calendarDateFormat)
-                    ) {
-                        $this->data[$occ->format($this->calendarDateFormat)]['operations'][] = $op;
+                        if (
+                            $occ->format($this->calendarDateFormat) >= $this->getStartDate()->format($this->calendarDateFormat) && 
+                            $occ->format($this->calendarDateFormat) <= $this->getEndDate()->format($this->calendarDateFormat)
+                        ) {
+                            $this->data[$occ->format($this->calendarDateFormat)]['operations'][] = $op;
+                        }
                     }
                 }
             }
         }
+        
         ksort($this->dailyBalance);
     }
 

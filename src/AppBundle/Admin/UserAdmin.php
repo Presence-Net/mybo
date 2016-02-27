@@ -8,23 +8,23 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class OperationModificationAdmin extends Admin
+class UserAdmin extends Admin
 {
-    protected $translationDomain = 'SonataPageBundle'; // default is 'messages'
-    
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('id')
-            ->add('user')
-            ->add('operation')
-            ->add('oldDate', null, [], 'sonata_type_date_picker')
-            ->add('newDate', null, [], 'sonata_type_date_picker')
-            ->add('oldAmount')
-            ->add('newAmount')
+            ->add('first_name')
+            ->add('last_name')
+            ->add('email')
+            ->add('enabled')
+            ->add('locked')
+            ->add('expired')
+            ->add('country')
+            ->add('locale')
+            ->add('currency')
         ;
     }
 
@@ -34,13 +34,16 @@ class OperationModificationAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
-            ->add('user')
-            ->add('operation')
-            ->add('oldDate')
-            ->add('newDate')
-            ->add('oldAmount')
-            ->add('newAmount')
+            ->add('first_name')
+            ->add('last_name')
+            ->add('email')
+            ->add('enabled')
+            ->add('locked')
+            ->add('expired')
+            ->add('roles')
+            ->add('country')
+            ->add('locale')
+            ->add('currency')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -57,12 +60,16 @@ class OperationModificationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('user')
-            ->add('operation')
-            ->add('oldDate', 'sonata_type_date_picker', array('required' => false))
-            ->add('newDate', 'sonata_type_date_picker', array('required' => false))
-            ->add('oldAmount', 'text', array('required' => false))
-            ->add('newAmount', 'text', array('required' => false))
+            ->add('first_name')
+            ->add('last_name')
+            ->add('email')
+            ->add('enabled')
+            ->add('locked')
+            ->add('expired')
+            ->add('roles')
+            ->add('country')
+            ->add('locale')
+            ->add('currency')
         ;
     }
 
@@ -73,12 +80,16 @@ class OperationModificationAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('user')
-            ->add('operation')
-            ->add('oldDate')
-            ->add('newDate')
-            ->add('oldAmount')
-            ->add('newAmount')
+            ->add('first_name')
+            ->add('last_name')
+            ->add('email')
+            ->add('enabled')
+            ->add('locked')
+            ->add('expired')
+            ->add('roles')
+            ->add('country')
+            ->add('locale')
+            ->add('currency')
         ;
     }
 }

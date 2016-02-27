@@ -11,8 +11,26 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Operation}
 
-    app.admin.operation_modification:
-        class: AppBundle\Admin\OperationModificationAdmin
-        arguments: [~, AppBundle\Entity\OperationModification, SonataAdminBundle:CRUD]
+    app.admin.instance:
+        class: AppBundle\Admin\InstanceAdmin
+        arguments: [~, AppBundle\Entity\Instance, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: OperationModification}
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Instance}
+
+    app.admin.instance_modification:
+        class: AppBundle\Admin\InstanceModificationAdmin
+        arguments: [~, AppBundle\Entity\InstanceModification, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: InstanceModification}
+
+    app.admin.user:
+        class: AppBundle\Admin\UserAdmin
+        arguments: [~, AppBundle\Entity\User, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: User}
+
+    app.admin.group:
+        class: AppBundle\Admin\GroupAdmin
+        arguments: [~, AppBundle\Entity\Group, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Group}

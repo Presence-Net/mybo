@@ -80,11 +80,11 @@
                                                         <div class="ui list">
                                                             {% for operation in day.operations %}
                                                             <div class="item">
-                                                                {% if operation.icon is not null %}
-                                                                <img class="ui icon image" src="{% path operation.icon, 'small' %}">
+                                                                {% if operation.getOperation().icon is not null %}
+                                                                <img class="ui icon image" src="{% path operation.getOperation().icon, 'small' %}">
                                                                 {% endif %}
                                                                 <div class="content">
-                                                                    <a class="header">{{ operation.name }}</a>
+                                                                    <a class="header">{{ operation.getOperation().name }}</a>
                                                                     <div class="description">{{ operation.amount|localizedcurrency(app.user.currency) }}</div>
                                                                 </div>
                                                             </div>

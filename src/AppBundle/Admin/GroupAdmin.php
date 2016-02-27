@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class OperationAdmin extends Admin
+class GroupAdmin extends Admin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -16,10 +16,8 @@ class OperationAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('user')
-            ->add('category')
             ->add('name')
-            ->add('description')
+            ->add('roles')
         ;
     }
 
@@ -29,11 +27,8 @@ class OperationAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('icon')
-            ->add('user')
-            ->add('category')
             ->add('name')
-            ->add('description')
+            ->add('roles')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -50,11 +45,8 @@ class OperationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('user')
-            ->add('category')
             ->add('name')
-            ->add('description')
-            ->add('icon', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'instance')))
+            ->add('roles')
         ;
     }
 
@@ -65,10 +57,8 @@ class OperationAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('user')
-            ->add('category')
             ->add('name')
-            ->add('description')
+            ->add('roles')
         ;
     }
 }

@@ -8,18 +8,22 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class OperationAdmin extends Admin
+class InstanceModificationAdmin extends Admin
 {
+    protected $translationDomain = 'SonataPageBundle'; // default is 'messages'
+    
     /**
      * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('user')
-            ->add('category')
-            ->add('name')
-            ->add('description')
+            ->add('instance')
+            ->add('oldDate', null, [], 'sonata_type_date_picker')
+            ->add('newDate', null, [], 'sonata_type_date_picker')
+            ->add('oldAmount')
+            ->add('newAmount')
+            ->add('noop')
         ;
     }
 
@@ -29,11 +33,11 @@ class OperationAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('icon')
-            ->add('user')
-            ->add('category')
-            ->add('name')
-            ->add('description')
+            ->add('instance')
+            ->add('oldDate')
+            ->add('newDate')
+            ->add('oldAmount')
+            ->add('newAmount')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -41,6 +45,7 @@ class OperationAdmin extends Admin
                     'delete' => array(),
                 )
             ))
+            ->add('noop')
         ;
     }
 
@@ -50,11 +55,12 @@ class OperationAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('user')
-            ->add('category')
-            ->add('name')
-            ->add('description')
-            ->add('icon', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'instance')))
+            ->add('instance')
+            ->add('oldDate', 'sonata_type_date_picker', array('required' => false))
+            ->add('newDate', 'sonata_type_date_picker', array('required' => false))
+            ->add('oldAmount', 'text', array('required' => false))
+            ->add('newAmount', 'text', array('required' => false))
+            ->add('noop')
         ;
     }
 
@@ -65,10 +71,12 @@ class OperationAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('user')
-            ->add('category')
-            ->add('name')
-            ->add('description')
+            ->add('instance')
+            ->add('oldDate')
+            ->add('newDate')
+            ->add('oldAmount')
+            ->add('newAmount')
+            ->add('noop')
         ;
     }
 }

@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * OperationModification
+ * InstanceModification
  *
- * @ORM\Table(name="operation_modifications")
+ * @ORM\Table(name="instance_modifications")
  * @ORM\Entity
  */
-class OperationModification
+class InstanceModification
 {
     /**
      * @var integer
@@ -23,19 +23,12 @@ class OperationModification
     private $id;
 
     /**
-     * @var User
+     * @var Instance
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="operations")
+     * @ORM\ManyToOne(targetEntity="Instance", inversedBy="modifications")
+     * @ORM\JoinColumn(name="instance_id", referencedColumnName="id")
      */
-    private $user;
-
-    /**
-     * @var Operation
-     *
-     * @ORM\ManyToOne(targetEntity="Operation", inversedBy="modifications")
-     * @ORM\JoinColumn(name="operation_id", referencedColumnName="id")
-     */
-    private $operation;
+    private $instance;
 
     /**
      * @var \DateTime
@@ -65,6 +58,13 @@ class OperationModification
      */
     private $newAmount;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="noop", type="boolean")
+     */
+    private $noop;
+
 
     /**
      * Get id
@@ -77,56 +77,33 @@ class OperationModification
     }
 
     /**
-     * Set user
+     * Set instance
      *
-     * @param User $user
-     * @return OperationModification
+     * @param Instance $instance
+     * @return InstanceModification
      */
-    public function setUser($user)
+    public function setInstance($instance)
     {
-        $this->user = $user;
+        $this->instance = $instance;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get instance
      *
-     * @return User 
+     * @return Instance 
      */
-    public function getUser()
+    public function getInstance()
     {
-        return $this->user;
-    }
-
-    /**
-     * Set operation
-     *
-     * @param Operation $operation
-     * @return OperationModification
-     */
-    public function setOperation($operation)
-    {
-        $this->operation = $operation;
-
-        return $this;
-    }
-
-    /**
-     * Get operation
-     *
-     * @return Operation 
-     */
-    public function getOperation()
-    {
-        return $this->operation;
+        return $this->instance;
     }
 
     /**
      * Set oldDate
      *
      * @param \DateTime $oldDate
-     * @return OperationModification
+     * @return InstanceModification
      */
     public function setOldDate($oldDate)
     {
@@ -149,7 +126,7 @@ class OperationModification
      * Set newDate
      *
      * @param \DateTime $newDate
-     * @return OperationModification
+     * @return InstanceModification
      */
     public function setNewDate($newDate)
     {
@@ -172,7 +149,7 @@ class OperationModification
      * Set oldAmount
      *
      * @param float $oldAmount
-     * @return OperationModification
+     * @return InstanceModification
      */
     public function setOldAmount($oldAmount)
     {
@@ -195,7 +172,7 @@ class OperationModification
      * Set newAmount
      *
      * @param float $newAmount
-     * @return OperationModification
+     * @return InstanceModification
      */
     public function setNewAmount($newAmount)
     {
@@ -212,5 +189,28 @@ class OperationModification
     public function getNewAmount()
     {
         return $this->newAmount;
+    }
+
+    /**
+     * Set noop
+     *
+     * @param Noop $noop
+     * @return InstanceModification
+     */
+    public function setNoop($noop)
+    {
+        $this->noop = $noop;
+
+        return $this;
+    }
+
+    /**
+     * Get noop
+     *
+     * @return Noop 
+     */
+    public function getNoop()
+    {
+        return $this->noop;
     }
 }
