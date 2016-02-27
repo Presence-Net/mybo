@@ -42,14 +42,14 @@ class Operation
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="instances")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="operations")
      */
     private $user;
 
     /**
      * @var Category
      *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="instances")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="operations")
      */
     private $category;
 
