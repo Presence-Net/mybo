@@ -8,6 +8,12 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
+
+use Symfony\Component\Intl\Intl;
+
 class UserAdmin extends Admin
 {
     /**
@@ -40,7 +46,6 @@ class UserAdmin extends Admin
             ->add('enabled')
             ->add('locked')
             ->add('expired')
-            ->add('roles')
             ->add('country')
             ->add('locale')
             ->add('currency')
@@ -64,12 +69,15 @@ class UserAdmin extends Admin
             ->add('last_name')
             ->add('email')
             ->add('enabled')
-            ->add('locked')
-            ->add('expired')
-            ->add('roles')
-            ->add('country')
-            ->add('locale')
-            ->add('currency')
+            ->add('country', CountryType::class, [
+                'data' => 'CA',
+            ])
+            ->add('locale', LocaleType::class, [
+                'data' => 'en_CA',
+            ])
+            ->add('currency', CurrencyType::class, [
+                'data' => 'CAD',
+            ])
         ;
     }
 
