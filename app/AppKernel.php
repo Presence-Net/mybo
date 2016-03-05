@@ -29,7 +29,7 @@ class AppKernel extends Kernel {
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            //new FOS\RestBundle\FOSRestBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
             new Lunetics\LocaleBundle\LuneticsLocaleBundle(),
             new JMS\AopBundle\JMSAopBundle,
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
