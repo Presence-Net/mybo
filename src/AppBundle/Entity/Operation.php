@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -13,6 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * 
+ * @ExclusionPolicy("all")
  */
 class Operation
 {
@@ -22,6 +27,8 @@ class Operation
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
+     * @Expose
      */
     private $id;
 
@@ -29,6 +36,8 @@ class Operation
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * 
+     * @Expose
      */
     private $name;
 
@@ -57,6 +66,8 @@ class Operation
      * @var Instance
      *
      * @ORM\OneToMany(targetEntity="Instance", mappedBy="operation")
+     * 
+     * @Expose
      */
     private $instances;
 
@@ -73,6 +84,8 @@ class Operation
      * @var \Application\Sonata\MediaBundle\Entity\Media
      * 
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"}, fetch="LAZY")
+     * 
+     * @Expose
      */
     private $icon;
 

@@ -6,8 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use FOS\RestBundle\Controller\Annotations\View;
-
 use AppBundle\Entity\InstanceModification;
 
 class ModificationController extends ApiController
@@ -17,9 +15,6 @@ class ModificationController extends ApiController
         $this->parentField = 'instance';
     }
     
-    /**
-     * @View()
-     */
     public function cgetAction($categoryId, $operationId, $instanceId)
     {
         $entities = $this->getEntities($instanceId);
@@ -27,9 +22,6 @@ class ModificationController extends ApiController
         return $this->createView($entities);
     }
     
-    /**
-     * @View()
-     */
     public function getAction($categoryId, $operationId, $instanceId, $modificationId)
     {
         $entity = $this->getEntity($modificationId);

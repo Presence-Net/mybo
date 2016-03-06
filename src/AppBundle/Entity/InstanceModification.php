@@ -5,11 +5,16 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
 /**
  * InstanceModification
  *
  * @ORM\Table(name="instance_modifications")
  * @ORM\Entity
+ * 
+ * @ExclusionPolicy("all")
  */
 class InstanceModification
 {
@@ -19,6 +24,8 @@ class InstanceModification
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
+     * @Expose
      */
     private $id;
 
@@ -34,6 +41,8 @@ class InstanceModification
      * @var \DateTime
      *
      * @ORM\Column(name="oldDate", type="date", nullable=true)
+     * 
+     * @Expose
      */
     private $oldDate;
 
@@ -41,6 +50,8 @@ class InstanceModification
      * @var \DateTime
      *
      * @ORM\Column(name="newDate", type="date", nullable=true)
+     * 
+     * @Expose
      */
     private $newDate;
 
@@ -48,6 +59,8 @@ class InstanceModification
      * @var float
      *
      * @ORM\Column(name="oldAmount", type="float", nullable=true)
+     * 
+     * @Expose
      */
     private $oldAmount;
 
@@ -55,6 +68,8 @@ class InstanceModification
      * @var float
      *
      * @ORM\Column(name="newAmount", type="float", nullable=true)
+     * 
+     * @Expose
      */
     private $newAmount;
 
@@ -62,6 +77,8 @@ class InstanceModification
      * @var boolean
      *
      * @ORM\Column(name="noop", type="boolean")
+     * 
+     * @Expose
      */
     private $noop;
 

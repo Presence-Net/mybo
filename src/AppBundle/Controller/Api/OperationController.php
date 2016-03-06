@@ -6,8 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use FOS\RestBundle\Controller\Annotations\View;
-
 use AppBundle\Entity\Operation;
 
 class OperationController extends ApiController
@@ -17,9 +15,6 @@ class OperationController extends ApiController
         $this->parentField = 'category';
     }
     
-    /**
-     * @View()
-     */
     public function cgetAction($categoryId)
     {
         $entities = $this->getEntities($categoryId);
@@ -27,9 +22,6 @@ class OperationController extends ApiController
         return $this->createView($entities);
     }
     
-    /**
-     * @View()
-     */
     public function getAction($categoryId, $operationId)
     {
         $entity = $this->getEntity($operationId);

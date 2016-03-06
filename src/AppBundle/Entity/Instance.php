@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -13,6 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="instances")
  * @ORM\Entity
+ * 
+ * @ExclusionPolicy("all")
  */
 class Instance
 {
@@ -29,6 +34,8 @@ class Instance
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
+     * @Expose
      */
     private $id;
 
@@ -43,6 +50,8 @@ class Instance
      * @var InstanceModification
      *
      * @ORM\OneToMany(targetEntity="InstanceModification", mappedBy="instance")
+     * 
+     * @Expose
      */
     private $modifications;
 
@@ -50,6 +59,8 @@ class Instance
      * @var float
      *
      * @ORM\Column(name="amount", type="float")
+     * 
+     * @Expose
      */
     private $amount = 0;
 
@@ -57,6 +68,8 @@ class Instance
      * @var \DateTime
      *
      * @ORM\Column(name="startDate", type="date")
+     * 
+     * @Expose
      */
     private $startDate;
 
@@ -64,6 +77,8 @@ class Instance
      * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="date", nullable=true)
+     * 
+     * @Expose
      */
     private $endDate;
 
@@ -71,6 +86,8 @@ class Instance
      * @var string
      *
      * @ORM\Column(name="recurrence", type="string", length=255)
+     * 
+     * @Expose
      */
     private $recurrence;
 
@@ -78,6 +95,8 @@ class Instance
      * @var integer
      *
      * @ORM\Column(name="recurrenceInterval", type="integer")
+     * 
+     * @Expose
      */
     private $recurrenceInterval = 0;
 
@@ -85,6 +104,8 @@ class Instance
      * @var integer
      *
      * @ORM\Column(name="count", type="integer")
+     * 
+     * @Expose
      */
     private $count = 0;
 
@@ -92,6 +113,8 @@ class Instance
      * @var string
      *
      * @ORM\Column(name="days", type="string", length=255, nullable=true)
+     * 
+     * @Expose
      */
     private $days;
 

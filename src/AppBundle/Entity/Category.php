@@ -5,7 +5,9 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
+
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -16,6 +18,8 @@ use Gedmo\Translatable\Translatable;
  *
  * @ORM\Table(name="categories")
  * @ORM\Entity
+ * 
+ * @ExclusionPolicy("all")
  */
 class Category implements Translatable
 {
@@ -26,7 +30,7 @@ class Category implements Translatable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
-     * @Groups({"api"})
+     * @Expose
      */
     private $id;
 
@@ -36,7 +40,7 @@ class Category implements Translatable
      * @ORM\Column(name="name", type="string", length=255)
      * @Gedmo\Translatable
      * 
-     * @Groups({"api"})
+     * @Expose
      */
     private $name;
 
@@ -46,7 +50,7 @@ class Category implements Translatable
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Gedmo\Translatable
      * 
-     * @Groups({"api"})
+     * @Expose
      */
     private $description = null;
 
@@ -55,7 +59,7 @@ class Category implements Translatable
      *
      * @ORM\Column(name="rank", type="integer")
      * 
-     * @Groups({"api"})
+     * @Expose
      */
     private $rank = 0;
 
@@ -64,7 +68,7 @@ class Category implements Translatable
      *
      * @ORM\Column(name="isDefault", type="boolean", nullable=true)
      * 
-     * @Groups({"api"})
+     * @Expose
      */
     private $isDefault = false;
     
@@ -73,7 +77,7 @@ class Category implements Translatable
      *
      * @ORM\Column(name="isHidden", type="boolean", nullable=true)
      * 
-     * @Groups({"api"})
+     * @Expose
      */
     private $isHidden = false;
     
@@ -90,7 +94,7 @@ class Category implements Translatable
      * Used locale to override Translation listener`s locale
      * this is not a mapped field of entity metadata, just a simple property
      * 
-     * @Groups({"api"})
+     * @Expose
      */
     private $locale;
     
@@ -101,12 +105,14 @@ class Category implements Translatable
      * 
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"}, fetch="LAZY")
      * 
-     * @Groups({"api"})
+     * @Expose
      */
     private $icon;
     
     /**
      * @ORM\OneToMany(targetEntity="Operation", mappedBy="category")
+     * 
+     * @Expose
      */
     private $operations;
 
