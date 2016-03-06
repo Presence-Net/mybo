@@ -19,13 +19,13 @@ class OperationController extends ApiController
     {
         $entities = $this->getEntities($categoryId);
         
-        return $this->createView($entities);
+        return $this->createView($entities, array('operations'));
     }
     
     public function getAction($categoryId, $operationId)
     {
         $entity = $this->getEntity($operationId);
         
-        return $this->createView($entity);
+        return $this->createView($entity, array('operation'));
     }
 }

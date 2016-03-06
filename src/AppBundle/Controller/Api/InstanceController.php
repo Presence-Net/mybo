@@ -19,13 +19,13 @@ class InstanceController extends ApiController
     {
         $entities = $this->getEntities($operationId);
         
-        return $this->createView($entities);
+        return $this->createView($entities, array('instances'));
     }
     
     public function getAction($categoryId, $operationId, $instanceId)
     {
         $entity = $this->getEntity($instanceId);
         
-        return $this->createView($entity);
+        return $this->createView($entity, array('instance'));
     }
 }

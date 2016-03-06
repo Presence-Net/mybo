@@ -19,13 +19,13 @@ class CategoryController extends ApiController
     {
         $entities = $this->getEntities();
         
-        return $this->createView($entities);
+        return $this->createView($entities, array('categories'));
     }
     
     public function getAction($categoryId)
     {
         $entity = $this->getEntity($categoryId);
         
-        return $this->createView($entity);
+        return $this->createView($entity, array('category'));
     }
 }

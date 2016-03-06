@@ -6,8 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -16,8 +15,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table()
  * @ORM\Entity
- * 
- * @ExclusionPolicy("all")
  */
 class Operation
 {
@@ -28,7 +25,7 @@ class Operation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
-     * @Expose
+     * @Groups({"category", "operation", "operations", "instance"})
      */
     private $id;
 
@@ -37,7 +34,7 @@ class Operation
      *
      * @ORM\Column(name="name", type="string", length=255)
      * 
-     * @Expose
+     * @Groups({"category", "operation", "operations", "instance"})
      */
     private $name;
 
@@ -45,6 +42,7 @@ class Operation
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
+     * @Groups({"category", "operation", "operations", "instance"})
      */
     private $description;
 
@@ -59,6 +57,7 @@ class Operation
      * @var Category
      *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="operations")
+     * @Groups({"operation"})
      */
     private $category;
 
@@ -66,8 +65,9 @@ class Operation
      * @var Instance
      *
      * @ORM\OneToMany(targetEntity="Instance", mappedBy="operation")
+     * @ORM\OrderBy({"startDate" = "ASC"})
      * 
-     * @Expose
+     * @Groups({"operation"})
      */
     private $instances;
 
@@ -85,7 +85,7 @@ class Operation
      * 
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"}, fetch="LAZY")
      * 
-     * @Expose
+     * @Groups({"category", "operation", "operations", "instance"})
      */
     private $icon;
 

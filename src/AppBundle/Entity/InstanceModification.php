@@ -5,16 +5,13 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * InstanceModification
  *
  * @ORM\Table(name="instance_modifications")
  * @ORM\Entity
- * 
- * @ExclusionPolicy("all")
  */
 class InstanceModification
 {
@@ -25,7 +22,7 @@ class InstanceModification
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
-     * @Expose
+     * @Groups({"modification", "modifications", "instance"})
      */
     private $id;
 
@@ -34,6 +31,8 @@ class InstanceModification
      *
      * @ORM\ManyToOne(targetEntity="Instance", inversedBy="modifications")
      * @ORM\JoinColumn(name="instance_id", referencedColumnName="id")
+     * 
+     * @Groups({"modification"})
      */
     private $instance;
 
@@ -42,7 +41,7 @@ class InstanceModification
      *
      * @ORM\Column(name="oldDate", type="date", nullable=true)
      * 
-     * @Expose
+     * @Groups({"modification", "modifications", "instance"})
      */
     private $oldDate;
 
@@ -51,7 +50,7 @@ class InstanceModification
      *
      * @ORM\Column(name="newDate", type="date", nullable=true)
      * 
-     * @Expose
+     * @Groups({"modification", "modifications", "instance"})
      */
     private $newDate;
 
@@ -60,7 +59,7 @@ class InstanceModification
      *
      * @ORM\Column(name="oldAmount", type="float", nullable=true)
      * 
-     * @Expose
+     * @Groups({"modification", "modifications", "instance"})
      */
     private $oldAmount;
 
@@ -69,7 +68,7 @@ class InstanceModification
      *
      * @ORM\Column(name="newAmount", type="float", nullable=true)
      * 
-     * @Expose
+     * @Groups({"modification", "modifications", "instance"})
      */
     private $newAmount;
 
@@ -78,7 +77,7 @@ class InstanceModification
      *
      * @ORM\Column(name="noop", type="boolean")
      * 
-     * @Expose
+     * @Groups({"modification", "modifications", "instance"})
      */
     private $noop;
 

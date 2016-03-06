@@ -6,8 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -16,8 +15,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="instances")
  * @ORM\Entity
- * 
- * @ExclusionPolicy("all")
  */
 class Instance
 {
@@ -35,7 +32,7 @@ class Instance
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
-     * @Expose
+     * @Groups({"instance", "instances", "operation", "modification"})
      */
     private $id;
 
@@ -43,6 +40,8 @@ class Instance
      * @var Operation
      *
      * @ORM\ManyToOne(targetEntity="Operation", inversedBy="instances")
+     * 
+     * @Groups({"instance"})
      */
     private $operation;
 
@@ -51,7 +50,7 @@ class Instance
      *
      * @ORM\OneToMany(targetEntity="InstanceModification", mappedBy="instance")
      * 
-     * @Expose
+     * @Groups({"instance"})
      */
     private $modifications;
 
@@ -60,7 +59,7 @@ class Instance
      *
      * @ORM\Column(name="amount", type="float")
      * 
-     * @Expose
+     * @Groups({"instance", "instances", "operation", "modification"})
      */
     private $amount = 0;
 
@@ -69,7 +68,7 @@ class Instance
      *
      * @ORM\Column(name="startDate", type="date")
      * 
-     * @Expose
+     * @Groups({"instance", "instances", "operation", "modification"})
      */
     private $startDate;
 
@@ -78,7 +77,7 @@ class Instance
      *
      * @ORM\Column(name="endDate", type="date", nullable=true)
      * 
-     * @Expose
+     * @Groups({"instance", "instances", "operation", "modification"})
      */
     private $endDate;
 
@@ -87,7 +86,7 @@ class Instance
      *
      * @ORM\Column(name="recurrence", type="string", length=255)
      * 
-     * @Expose
+     * @Groups({"instance", "instances", "operation", "modification"})
      */
     private $recurrence;
 
@@ -96,7 +95,7 @@ class Instance
      *
      * @ORM\Column(name="recurrenceInterval", type="integer")
      * 
-     * @Expose
+     * @Groups({"instance", "instances", "operation", "modification"})
      */
     private $recurrenceInterval = 0;
 
@@ -105,7 +104,7 @@ class Instance
      *
      * @ORM\Column(name="count", type="integer")
      * 
-     * @Expose
+     * @Groups({"instance", "instances", "operation", "modification"})
      */
     private $count = 0;
 
@@ -114,7 +113,7 @@ class Instance
      *
      * @ORM\Column(name="days", type="string", length=255, nullable=true)
      * 
-     * @Expose
+     * @Groups({"instance", "instances", "operation", "modification"})
      */
     private $days;
 

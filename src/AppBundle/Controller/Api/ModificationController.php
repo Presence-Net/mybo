@@ -19,13 +19,13 @@ class ModificationController extends ApiController
     {
         $entities = $this->getEntities($instanceId);
         
-        return $this->createView($entities);
+        return $this->createView($entities, array('modifications'));
     }
     
     public function getAction($categoryId, $operationId, $instanceId, $modificationId)
     {
         $entity = $this->getEntity($modificationId);
         
-        return $this->createView($entity);
+        return $this->createView($entity, array('modification'));
     }
 }

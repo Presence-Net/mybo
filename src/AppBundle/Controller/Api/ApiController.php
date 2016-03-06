@@ -5,17 +5,25 @@ namespace AppBundle\Controller\Api;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 
+use JMS\Serializer\SerializationContext;
+
 
 class ApiController extends FOSRestController implements ClassResourceInterface {
 
     protected $class = null;
     protected $parentField = null;
     
-    protected function createView($data)
+    protected function createView($data, $serializerGroups = null)
     {
-        return \FOS\RestBundle\View\View::create()
+        $view = \FOS\RestBundle\View\View::create()
             ->setStatusCode(200)
             ->setData($data);
+        
+        if($serializerGroups) {
+            $view->setSerializationContext(SerializationContext::create()->setGroups($serializerGroups));
+        }
+        
+        return $view;
     }
 
     /**

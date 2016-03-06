@@ -6,11 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 use Gedmo\Mapping\Annotation as Gedmo;
-
 use Gedmo\Translatable\Translatable;
 
 /**
@@ -18,8 +16,6 @@ use Gedmo\Translatable\Translatable;
  *
  * @ORM\Table(name="categories")
  * @ORM\Entity
- * 
- * @ExclusionPolicy("all")
  */
 class Category implements Translatable
 {
@@ -30,7 +26,7 @@ class Category implements Translatable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
-     * @Expose
+     * @Groups({"category", "operation", "categories", "category_operations"})
      */
     private $id;
 
@@ -40,7 +36,7 @@ class Category implements Translatable
      * @ORM\Column(name="name", type="string", length=255)
      * @Gedmo\Translatable
      * 
-     * @Expose
+     * @Groups({"category", "operation", "categories", "category_operations"})
      */
     private $name;
 
@@ -50,7 +46,7 @@ class Category implements Translatable
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Gedmo\Translatable
      * 
-     * @Expose
+     * @Groups({"category", "operation", "categories", "category_operations"})
      */
     private $description = null;
 
@@ -59,7 +55,7 @@ class Category implements Translatable
      *
      * @ORM\Column(name="rank", type="integer")
      * 
-     * @Expose
+     * @Groups({"category", "operation", "categories", "category_operations"})
      */
     private $rank = 0;
 
@@ -68,7 +64,7 @@ class Category implements Translatable
      *
      * @ORM\Column(name="isDefault", type="boolean", nullable=true)
      * 
-     * @Expose
+     * @Groups({"category", "operation", "categories", "category_operations"})
      */
     private $isDefault = false;
     
@@ -77,7 +73,7 @@ class Category implements Translatable
      *
      * @ORM\Column(name="isHidden", type="boolean", nullable=true)
      * 
-     * @Expose
+     * @Groups({"category", "operation", "categories", "category_operations"})
      */
     private $isHidden = false;
     
@@ -86,6 +82,8 @@ class Category implements Translatable
      * @var Category 
      * 
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", cascade={"all"}, fetch="LAZY")
+     * 
+     * @Groups({"category", "operation", "categories", "category_operations"})
      */
     private $parent = null;
 
@@ -93,8 +91,6 @@ class Category implements Translatable
      * @Gedmo\Locale
      * Used locale to override Translation listener`s locale
      * this is not a mapped field of entity metadata, just a simple property
-     * 
-     * @Expose
      */
     private $locale;
     
@@ -105,14 +101,15 @@ class Category implements Translatable
      * 
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"}, fetch="LAZY")
      * 
-     * @Expose
+     * @Groups({"category", "operation", "categories", "category_operations"})
      */
     private $icon;
     
     /**
      * @ORM\OneToMany(targetEntity="Operation", mappedBy="category")
+     * @ORM\OrderBy({"name" = "ASC"})
      * 
-     * @Expose
+     * @Groups({"category"})
      */
     private $operations;
 
