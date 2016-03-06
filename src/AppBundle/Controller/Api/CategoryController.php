@@ -18,7 +18,7 @@ class CategoryController extends ApiController
     }
     
     /**
-     * @View()
+     * @View(serializerGroups={"api"})
      */
     public function cgetAction()
     {
@@ -28,7 +28,7 @@ class CategoryController extends ApiController
     }
     
     /**
-     * @View()
+     * @View(serializerGroups={"api"})
      */
     public function getAction($categoryId)
     {

@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -24,6 +25,8 @@ class Category implements Translatable
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
+     * @Groups({"api"})
      */
     private $id;
 
@@ -32,6 +35,8 @@ class Category implements Translatable
      *
      * @ORM\Column(name="name", type="string", length=255)
      * @Gedmo\Translatable
+     * 
+     * @Groups({"api"})
      */
     private $name;
 
@@ -40,6 +45,8 @@ class Category implements Translatable
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Gedmo\Translatable
+     * 
+     * @Groups({"api"})
      */
     private $description = null;
 
@@ -47,6 +54,8 @@ class Category implements Translatable
      * @var integer
      *
      * @ORM\Column(name="rank", type="integer")
+     * 
+     * @Groups({"api"})
      */
     private $rank = 0;
 
@@ -54,6 +63,8 @@ class Category implements Translatable
      * @var boolean
      *
      * @ORM\Column(name="isDefault", type="boolean", nullable=true)
+     * 
+     * @Groups({"api"})
      */
     private $isDefault = false;
     
@@ -61,6 +72,8 @@ class Category implements Translatable
      * @var boolean
      *
      * @ORM\Column(name="isHidden", type="boolean", nullable=true)
+     * 
+     * @Groups({"api"})
      */
     private $isHidden = false;
     
@@ -76,6 +89,8 @@ class Category implements Translatable
      * @Gedmo\Locale
      * Used locale to override Translation listener`s locale
      * this is not a mapped field of entity metadata, just a simple property
+     * 
+     * @Groups({"api"})
      */
     private $locale;
     
@@ -85,6 +100,8 @@ class Category implements Translatable
      * @var \Application\Sonata\MediaBundle\Entity\Media
      * 
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"}, fetch="LAZY")
+     * 
+     * @Groups({"api"})
      */
     private $icon;
     
