@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+
+use JMS\Serializer\Annotation\Groups;
+
 use When\When as RecursableCalendar;
 
 class Calendar {
@@ -13,24 +16,60 @@ class Calendar {
     private $date = null;
     private $startDate = null;
     private $endDate = null;
+    /**
+     * @var datetime
+     * @Groups({"calendar"})
+     */
     private $previousYear = null;
+    /**
+     * @var datetime
+     * @Groups({"calendar"})
+     */
     private $previousMonth = null;
+    /**
+     * @var datetime
+     * @Groups({"calendar"})
+     */
     private $nextMonth = null;
+    /**
+     * @var datetime
+     * @Groups({"calendar"})
+     */
     private $nextYear = null;
     //private $days = [];
     //private $weeks = [];
     private $operations = [];
+    /**
+     * @var array
+     * @Groups({"calendar"})
+     */
     private $data = [];
+    /**
+     * @var array
+     * @Groups({"calendar"})
+     */
     private $chart = [];
     private $engine = null;
+    /**
+     * @var array
+     * @Groups({"calendar"})
+     */
     private $previousBalance = 0;
     private $previousCalendarBalance = 0;
+    /**
+     * @var array
+     * @Groups({"calendar"})
+     */
     private $closingBalance = 0;
     private $dailyBalance = [];
     private $balanceAdjustments = [];
     private $calendarDateFormat = 'Ymd';
     private $calendarNavDateFormat = 'Ym';
     
+    /**
+     * @var array
+     * @Groups({"calendar"})
+     */
     private $categories = [];
 
     public function __construct(ContainerInterface $container) {

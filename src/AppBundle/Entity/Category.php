@@ -26,7 +26,7 @@ class Category implements Translatable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
-     * @Groups({"category", "operation", "categories", "category_operations"})
+     * @Groups({"category", "operation", "categories", "calendar"})
      */
     private $id;
 
@@ -36,7 +36,7 @@ class Category implements Translatable
      * @ORM\Column(name="name", type="string", length=255)
      * @Gedmo\Translatable
      * 
-     * @Groups({"category", "operation", "categories", "category_operations"})
+     * @Groups({"category", "operation", "categories", "calendar"})
      */
     private $name;
 
@@ -46,7 +46,7 @@ class Category implements Translatable
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Gedmo\Translatable
      * 
-     * @Groups({"category", "operation", "categories", "category_operations"})
+     * @Groups({"category", "operation", "categories", "calendar"})
      */
     private $description = null;
 
@@ -55,7 +55,7 @@ class Category implements Translatable
      *
      * @ORM\Column(name="rank", type="integer")
      * 
-     * @Groups({"category", "operation", "categories", "category_operations"})
+     * @Groups({"category", "operation", "categories", "calendar"})
      */
     private $rank = 0;
 
@@ -64,7 +64,7 @@ class Category implements Translatable
      *
      * @ORM\Column(name="isDefault", type="boolean", nullable=true)
      * 
-     * @Groups({"category", "operation", "categories", "category_operations"})
+     * @Groups({"category", "operation", "categories", "calendar"})
      */
     private $isDefault = false;
     
@@ -73,7 +73,7 @@ class Category implements Translatable
      *
      * @ORM\Column(name="isHidden", type="boolean", nullable=true)
      * 
-     * @Groups({"category", "operation", "categories", "category_operations"})
+     * @Groups({"category", "operation", "categories", "calendar"})
      */
     private $isHidden = false;
     
@@ -83,7 +83,7 @@ class Category implements Translatable
      * 
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", cascade={"all"}, fetch="LAZY")
      * 
-     * @Groups({"category", "operation", "categories", "category_operations"})
+     * @Groups({"category", "operation", "categories", "calendar"})
      */
     private $parent = null;
 
@@ -101,7 +101,7 @@ class Category implements Translatable
      * 
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"}, fetch="LAZY")
      * 
-     * @Groups({"category", "operation", "categories", "category_operations"})
+     * @Groups({"category", "operation", "categories", "calendar"})
      */
     private $icon;
     
@@ -109,7 +109,7 @@ class Category implements Translatable
      * @ORM\OneToMany(targetEntity="Operation", mappedBy="category")
      * @ORM\OrderBy({"name" = "ASC"})
      * 
-     * @Groups({"category"})
+     * @Groups({"category", "calendar"})
      */
     private $operations;
 

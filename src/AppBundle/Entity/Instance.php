@@ -32,7 +32,7 @@ class Instance
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
-     * @Groups({"instance", "instances", "operation", "modification"})
+     * @Groups({"instance", "instances", "operation", "modification", "calendar"})
      */
     private $id;
 
@@ -41,7 +41,7 @@ class Instance
      *
      * @ORM\ManyToOne(targetEntity="Operation", inversedBy="instances")
      * 
-     * @Groups({"instance"})
+     * @Groups({"instance", "calendar"})
      */
     private $operation;
 
@@ -59,7 +59,7 @@ class Instance
      *
      * @ORM\Column(name="amount", type="float")
      * 
-     * @Groups({"instance", "instances", "operation", "modification"})
+     * @Groups({"instance", "instances", "operation", "modification", "calendar"})
      */
     private $amount = 0;
 
