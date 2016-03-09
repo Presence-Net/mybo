@@ -8,8 +8,8 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 use JMS\Serializer\SerializationContext;
 
 
-class ApiController extends FOSRestController implements ClassResourceInterface {
-
+class ApiController extends FOSRestController implements ClassResourceInterface
+{
     protected $class = null;
     protected $parentField = null;
     

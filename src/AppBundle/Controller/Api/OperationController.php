@@ -2,30 +2,44 @@
 
 namespace AppBundle\Controller\Api;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
+use FOS\RestBundle\Util\Codes;
 
 use AppBundle\Entity\Operation;
 
-class OperationController extends ApiController
+class OperationController extends ApiCrudController
 {
     public function __construct() {
         $this->class = 'Operation';
+        $this->name = 'operation';
+        $this->plural = 'operations';
         $this->parentField = 'category';
+        
+        parent::__construct();
     }
     
+    /**
+     * Collection get action
+     * @var Request $request
+     * @return array
+     */
     public function cgetAction($categoryId)
     {
         $entities = $this->getEntities($categoryId);
         
-        return $this->createView($entities, array('operations'));
+        return $this->createView($entities, array($this->plural));
     }
-    
+
+    /**
+     * Get action
+     * @var integer $id Id of the entity
+     * @return array
+     */
     public function getAction($categoryId, $operationId)
     {
         $entity = $this->getEntity($operationId);
         
-        return $this->createView($entity, array('operation'));
+        return $this->createView($entity, array($this->name));
     }
 }
