@@ -15,9 +15,9 @@ class OperationController extends ApiCrudController
         parent::__construct();
     }
     
-    public function getInstancesAction($operationId)
+    public function getInstancesAction($id)
     {
-        $entity = $this->getEntity($operationId);
+        $entity = $this->getEntity($id);
         
         return $this->createView($entity->getInstances(), array('instances'));
     }

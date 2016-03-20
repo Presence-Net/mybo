@@ -15,9 +15,9 @@ class CategoryController extends ApiCrudController
         parent::__construct();
     }
     
-    public function getOperationsAction($categoryId)
+    public function getOperationsAction($id)
     {
-        $entity = $this->getEntity($categoryId);
+        $entity = $this->getEntity($id);
         
         return $this->createView($entity->getOperations(), array('operations'));
     }

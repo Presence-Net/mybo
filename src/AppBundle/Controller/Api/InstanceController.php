@@ -15,9 +15,9 @@ class InstanceController extends ApiCrudController
         parent::__construct();
     }
     
-    public function getModificationsAction($instanceId)
+    public function getModificationsAction($id)
     {
-        $entity = $this->getEntity($instanceId);
+        $entity = $this->getEntity($id);
         
         return $this->createView($entity->getModifications(), array('modifications'));
     }
