@@ -15,6 +15,18 @@ class CategoryController extends ApiCrudController
         parent::__construct();
     }
     
+    /**
+     * Get action
+     * @var integer $id Id of the entity
+     * @return array
+     */
+    public function cgetAction()
+    {
+        $entities = $this->getEntities();
+        
+        return $this->createView($entities, array($this->plural));
+    }
+    
     public function getOperationsAction($id)
     {
         $entity = $this->getEntity($id);
