@@ -6,17 +6,14 @@ operations:
     type:     rest
     name_prefix:  api_
     resource: AppBundle\Controller\Api\OperationController
-    parent: categories
 instances:
     type:     rest
     name_prefix:  api_
     resource: AppBundle\Controller\Api\InstanceController
-    parent: operations
 modifications:
     type:     rest
     name_prefix:  api_
     resource: AppBundle\Controller\Api\ModificationController
-    parent: instances
 calendar:
     type:     rest
     name_prefix:  api_

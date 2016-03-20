@@ -17,11 +17,11 @@ services:
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Instance}
 
-    app.admin.instance_modification:
-        class: AppBundle\Admin\InstanceModificationAdmin
-        arguments: [~, AppBundle\Entity\InstanceModification, SonataAdminBundle:CRUD]
+    app.admin.modification:
+        class: AppBundle\Admin\ModificationAdmin
+        arguments: [~, AppBundle\Entity\Modification, SonataAdminBundle:CRUD]
         tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: InstanceModification}
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Modification}
 
     app.admin.user:
         class: AppBundle\Admin\UserAdmin

@@ -11,7 +11,13 @@ use JMS\Serializer\SerializationContext;
 class ApiController extends FOSRestController implements ClassResourceInterface
 {
     protected $class = null;
+    protected $name = null;
+    protected $namePlural = null;
     protected $parentField = null;
+    
+    public function __construct() {
+        parent::__construct();
+    }
     
     protected function createView($data, $serializerGroups = null)
     {

@@ -19,6 +19,18 @@ class ApiCrudController extends ApiController
     }
 
     /**
+     * Get action
+     * @var integer $id Id of the entity
+     * @return array
+     */
+    public function getAction($entityId)
+    {
+        $entity = $this->getEntity($entityId);
+        
+        return $this->createView($entity, array($this->name));
+    }
+    
+    /**
      * Collection post action
      * @var Request $request
      * @return View|array

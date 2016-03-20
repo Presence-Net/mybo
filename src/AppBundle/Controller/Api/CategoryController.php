@@ -2,10 +2,6 @@
 
 namespace AppBundle\Controller\Api;
 
-use Symfony\Component\HttpFoundation\Request;
-
-use FOS\RestBundle\Util\Codes;
-
 use AppBundle\Entity\Category;
 
 class CategoryController extends ApiCrudController
@@ -14,32 +10,16 @@ class CategoryController extends ApiCrudController
         $this->class = 'Category';
         $this->name = 'category';
         $this->plural = 'categories';
+        $this->parentField = null;
         
         parent::__construct();
     }
     
-    /**
-     * Collection get action
-     * @var Request $request
-     * @return array
-     */
-    public function cgetAction()
-    {
-        $entities = $this->getEntities();
-        
-        return $this->createView($entities, array($this->plural));
-    }
-
-    /**
-     * Get action
-     * @var integer $id Id of the entity
-     * @return array
-     */
-    public function getAction($categoryId)
+    public function getOperationsAction($categoryId)
     {
         $entity = $this->getEntity($categoryId);
         
-        return $this->createView($entity, array($this->name));
+        return $this->createView($entity->getOperations(), array('operations'));
     }
 
 }

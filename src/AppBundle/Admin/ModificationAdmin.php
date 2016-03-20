@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class InstanceModificationAdmin extends Admin
+class ModificationAdmin extends Admin
 {
     protected $translationDomain = 'SonataPageBundle'; // default is 'messages'
     

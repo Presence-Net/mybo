@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation\Groups;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 use AppBundle\Entity\Instance;
-use AppBundle\Entity\InstanceModification;
+use AppBundle\Entity\Modification;
 
 /**
  * CalendarInstance
@@ -22,7 +22,7 @@ class CalendarInstance extends Instance
      */
     public $instance;
     /**
-     * @var InstanceModification
+     * @var Modification
      *
      * @Groups({"calendar"})
      */

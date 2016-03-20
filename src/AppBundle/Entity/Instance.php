@@ -46,9 +46,9 @@ class Instance
     private $operation;
 
     /**
-     * @var InstanceModification
+     * @var Modification
      *
-     * @ORM\OneToMany(targetEntity="InstanceModification", mappedBy="instance")
+     * @ORM\OneToMany(targetEntity="Modification", mappedBy="instance")
      * 
      * @Groups({"instance"})
      */

@@ -8,12 +8,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\Groups;
 
 /**
- * InstanceModification
+ * Modification
  *
  * @ORM\Table(name="instance_modifications")
  * @ORM\Entity
  */
-class InstanceModification
+class Modification
 {
     /**
      * @var integer
@@ -96,7 +96,7 @@ class InstanceModification
      * Set instance
      *
      * @param Instance $instance
-     * @return InstanceModification
+     * @return Modification
      */
     public function setInstance($instance)
     {
@@ -119,7 +119,7 @@ class InstanceModification
      * Set oldDate
      *
      * @param \DateTime $oldDate
-     * @return InstanceModification
+     * @return Modification
      */
     public function setOldDate($oldDate)
     {
@@ -142,7 +142,7 @@ class InstanceModification
      * Set newDate
      *
      * @param \DateTime $newDate
-     * @return InstanceModification
+     * @return Modification
      */
     public function setNewDate($newDate)
     {
@@ -165,7 +165,7 @@ class InstanceModification
      * Set oldAmount
      *
      * @param float $oldAmount
-     * @return InstanceModification
+     * @return Modification
      */
     public function setOldAmount($oldAmount)
     {
@@ -188,7 +188,7 @@ class InstanceModification
      * Set newAmount
      *
      * @param float $newAmount
-     * @return InstanceModification
+     * @return Modification
      */
     public function setNewAmount($newAmount)
     {
@@ -211,7 +211,7 @@ class InstanceModification
      * Set noop
      *
      * @param Noop $noop
-     * @return InstanceModification
+     * @return Modification
      */
     public function setNoop($noop)
     {
