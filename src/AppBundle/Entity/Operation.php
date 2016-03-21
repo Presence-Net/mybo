@@ -25,7 +25,7 @@ class Operation
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
-     * @Groups({"category", "operation", "operations", "instance", "calendar"})
+     * @Groups({"category", "categories", "operation", "operations", "instance", "calendar"})
      */
     private $id;
 
@@ -34,7 +34,7 @@ class Operation
      *
      * @ORM\Column(name="name", type="string", length=255)
      * 
-     * @Groups({"category", "operation", "operations", "instance", "calendar"})
+     * @Groups({"category", "categories", "operation", "operations", "instance", "calendar"})
      */
     private $name;
 
@@ -42,7 +42,7 @@ class Operation
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
-     * @Groups({"category", "operation", "operations", "instance", "calendar"})
+     * @Groups({"category", "categories", "operation", "operations", "instance", "calendar"})
      */
     private $description;
 

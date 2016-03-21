@@ -109,7 +109,7 @@ class Category implements Translatable
      * @ORM\OneToMany(targetEntity="Operation", mappedBy="category")
      * @ORM\OrderBy({"name" = "ASC"})
      * 
-     * @Groups({"category", "calendar"})
+     * @Groups({"category", "categories", "calendar"})
      */
     private $operations;
 
