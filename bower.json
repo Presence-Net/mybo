@@ -1,0 +1,21 @@
+{
+  "name": "mybo",
+  "homepage": "https://github.com/Presence-Net/mybo",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.2",
+    "semantic": "semantic-ui#^2.1.8",
+    "Chart.js": "chartjs#^1.0.2"
+  }
+}
