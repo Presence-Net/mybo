@@ -3,6 +3,8 @@
 }
 .calendar-nav .item.dropdown select {
     border: none;
+    width: inherit;
+    margin-right: 1rem;
 }
 .days-header .column {
     font-weight: bold;
