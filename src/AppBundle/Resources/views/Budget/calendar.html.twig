@@ -109,7 +109,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="center aligned">
+                                        <tr>
                                             <td>Starting balance</td>
                                             <td class="right aligned {% if calendar.getPreviousBalance < 0 %}negative{% endif %}{% if calendar.getPreviousBalance > 0 %}positive{% endif %}">{{ calendar.getPreviousBalance|localizedcurrency(app.user.currency) }}</td>
                                         </tr>
