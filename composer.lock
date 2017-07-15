@@ -5309,12 +5309,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tplaner/When.git",
-                "reference": "ac22c664356b4e273c1402111e5701ccd2b083bd"
+                "reference": "7f94f03f692675c675b41f8b71a2161b3290a463"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tplaner/When/zipball/ac22c664356b4e273c1402111e5701ccd2b083bd",
-                "reference": "ac22c664356b4e273c1402111e5701ccd2b083bd",
+                "url": "https://api.github.com/repos/tplaner/When/zipball/7f94f03f692675c675b41f8b71a2161b3290a463",
+                "reference": "7f94f03f692675c675b41f8b71a2161b3290a463",
                 "shasum": ""
             },
             "require": {
@@ -5347,7 +5347,7 @@
                 "recurrence",
                 "time"
             ],
-            "time": "2015-12-26 18:13:36"
+            "time": "2016-07-06 21:45:49"
         },
         {
             "name": "twig/extensions",
