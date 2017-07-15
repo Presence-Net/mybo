@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Operation
  *
- * @ORM\Table()
+ * @ORM\Table(name="operations")
  * @ORM\Entity
  */
 class Operation
